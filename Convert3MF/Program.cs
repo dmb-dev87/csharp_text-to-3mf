@@ -2,7 +2,6 @@
 using System.Linq;
 using System.IO;
 using Lib3MF;
-using Lib3MF.Internal;
 
 namespace Convert3MF
 { 
@@ -23,7 +22,7 @@ namespace Convert3MF
                 fileName = args[1];
             }
 
-            outputName = fileName.Substring(0, fileName.Length - fileName.IndexOf('.'));
+            outputName = fileName.Substring(0, fileName.Length - fileName.IndexOf('.') + 1);
             outputName += ".3mf";
 
             Console.WriteLine("Generating 3MF Model... " + outputName);
@@ -61,7 +60,13 @@ namespace Convert3MF
             modelCount = Int32.Parse(stringValues[1]);
 
             for (int modelId = 0; modelId < modelCount; modelId++)
-            {   
+            {
+                //##############################################################################	Mesh Object	Start
+                // Create Mesh Object
+                CMeshObject aMeshObject = aModel.AddMeshObject();
+                uint aResourceId, aPropertyId;
+                aMeshObject.GetObjectLevelProperty(out aResourceId, out aPropertyId);
+
                 // Add Color to colorgroup
                 sColor aColor;
                 strColor = reader.ReadLine();
@@ -69,8 +74,12 @@ namespace Convert3MF
                 aColor.Red = Byte.Parse(stringValues[1]);
                 aColor.Green = Byte.Parse(stringValues[2]);
                 aColor.Blue = Byte.Parse(stringValues[3]);
-                aColor.Alpha = 255;                
+                aColor.Alpha = 255;
+
                 //aColorGroup.AddColor(aColor);
+                //aColorGroup.SetColor(aPropertyId, aColor);
+
+                aMeshObject.SetName("Colored Box");
 
                 // Get vertext count and triangle count
                 int verticiesCount, triangleCount;
@@ -83,12 +92,6 @@ namespace Convert3MF
                 stringValues = strTriangle.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
                 triangleCount = Int32.Parse(stringValues[1]);
 
-                //##############################################################################	Mesh Object	Start
-                // Create Mesh Object
-                CMeshObject aMeshObject = aModel.AddMeshObject();
-
-                aMeshObject.SetName("Colored Box");
-                
                 // Create mesh structure of a cube
                 sPosition[] aVertices = new sPosition[verticiesCount];
                 for (int i = 0; i < verticiesCount; i++)

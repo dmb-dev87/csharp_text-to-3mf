@@ -65,6 +65,12 @@ namespace Lib3MF {
 		Outside = 2
 	};
 
+	public enum eBeamLatticeBallMode {
+		None = 0,
+		Mixed = 1,
+		All = 2
+	};
+
 	public enum eProgressIdentifier {
 		QUERYCANCELED = 0,
 		DONE = 1,
@@ -88,13 +94,40 @@ namespace Lib3MF {
 		WRITENOBJECTS = 19,
 		WRITENODES = 20,
 		WRITETRIANGLES = 21,
-		WRITESLICES = 22
+		WRITESLICES = 22,
+		WRITEKEYSTORE = 23
 	};
 
 	public enum eBlendMethod {
 		NoBlendMethod = 0,
 		Mix = 1,
 		Multiply = 2
+	};
+
+	public enum eEncryptionAlgorithm {
+		AES256_GCM = 1
+	};
+
+	public enum eWrappingAlgorithm {
+		RSA_OAEP = 0
+	};
+
+	public enum eMgfAlgorithm {
+		MGF1_SHA1 = 160,
+		MGF1_SHA224 = 224,
+		MGF1_SHA256 = 256,
+		MGF1_SHA384 = 384,
+		MGF1_SHA512 = 512
+	};
+
+	public enum eDigestMethod {
+		SHA1 = 160,
+		SHA256 = 256
+	};
+
+	public enum eCompression {
+		NoCompression = 0,
+		Deflate = 1
 	};
 
 	public struct sTriangle
@@ -160,6 +193,12 @@ namespace Lib3MF {
 		public UInt32[] Indices;
 		public Double[] Radii;
 		public eBeamLatticeCapMode[] CapModes;
+	}
+
+	public struct sBall
+	{
+		public UInt32 Index;
+		public Double Radius;
 	}
 
 
@@ -241,6 +280,13 @@ namespace Lib3MF {
 			[FieldOffset(24)] public fixed Int32 CapModes[2];
 		}
 
+		[StructLayout(LayoutKind.Explicit, Size=12)]
+		public unsafe struct InternalBall
+		{
+			[FieldOffset(0)] public UInt32 Index;
+			[FieldOffset(4)] public Double Radius;
+		}
+
 
 		public class Lib3MFWrapper
 		{
@@ -264,6 +310,24 @@ namespace Lib3MF {
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_setdecimalprecision", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Writer_SetDecimalPrecision (IntPtr Handle, UInt32 ADecimalPrecision);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_setstrictmodeactive", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Writer_SetStrictModeActive (IntPtr Handle, Byte AStrictModeActive);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_getstrictmodeactive", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Writer_GetStrictModeActive (IntPtr Handle, out Byte AStrictModeActive);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_getwarning", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Writer_GetWarning (IntPtr Handle, UInt32 AIndex, out UInt32 AErrorCode, UInt32 sizeWarning, out UInt32 neededWarning, IntPtr dataWarning);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_getwarningcount", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Writer_GetWarningCount (IntPtr Handle, out UInt32 ACount);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_addkeywrappingcallback", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Writer_AddKeyWrappingCallback (IntPtr Handle, byte[] AConsumerID, IntPtr ATheCallback, UInt64 AUserData);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_setcontentencryptioncallback", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Writer_SetContentEncryptionCallback (IntPtr Handle, IntPtr ATheCallback, UInt64 AUserData);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_readfromfile", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Reader_ReadFromFile (IntPtr Handle, byte[] AFilename);
@@ -295,8 +359,32 @@ namespace Lib3MF {
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_getwarningcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Reader_GetWarningCount (IntPtr Handle, out UInt32 ACount);
 
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_addkeywrappingcallback", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Reader_AddKeyWrappingCallback (IntPtr Handle, byte[] AConsumerID, IntPtr ATheCallback, UInt64 AUserData);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_setcontentencryptioncallback", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Reader_SetContentEncryptionCallback (IntPtr Handle, IntPtr ATheCallback, UInt64 AUserData);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_packagepart_getpath", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 PackagePart_GetPath (IntPtr Handle, UInt32 sizePath, out UInt32 neededPath, IntPtr dataPath);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_packagepart_setpath", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 PackagePart_SetPath (IntPtr Handle, byte[] APath);
+
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resource_getresourceid", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 Resource_GetResourceID (IntPtr Handle, out UInt32 AId);
+			public unsafe extern static Int32 Resource_GetResourceID (IntPtr Handle, out UInt32 AUniqueResourceID);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resource_getuniqueresourceid", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Resource_GetUniqueResourceID (IntPtr Handle, out UInt32 AUniqueResourceID);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resource_packagepart", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Resource_PackagePart (IntPtr Handle, out IntPtr APackagePart);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resource_setpackagepart", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Resource_SetPackagePart (IntPtr Handle, IntPtr APackagePart);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resource_getmodelresourceid", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Resource_GetModelResourceID (IntPtr Handle, out UInt32 AModelResourceId);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourceiterator_movenext", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ResourceIterator_MoveNext (IntPtr Handle, out Byte AHasNext);
@@ -491,10 +579,10 @@ namespace Lib3MF {
 			public unsafe extern static Int32 MeshObject_GetTriangleIndices (IntPtr Handle, UInt64 sizeIndices, out UInt64 neededIndices, IntPtr dataIndices);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_setobjectlevelproperty", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 MeshObject_SetObjectLevelProperty (IntPtr Handle, UInt32 AResourceID, UInt32 APropertyID);
+			public unsafe extern static Int32 MeshObject_SetObjectLevelProperty (IntPtr Handle, UInt32 AUniqueResourceID, UInt32 APropertyID);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_getobjectlevelproperty", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 MeshObject_GetObjectLevelProperty (IntPtr Handle, out UInt32 AResourceID, out UInt32 APropertyID, out Byte AHasObjectLevelProperty);
+			public unsafe extern static Int32 MeshObject_GetObjectLevelProperty (IntPtr Handle, out UInt32 AUniqueResourceID, out UInt32 APropertyID, out Byte AHasObjectLevelProperty);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_settriangleproperties", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_SetTriangleProperties (IntPtr Handle, UInt32 AIndex, InternalTriangleProperties AProperties);
@@ -527,16 +615,22 @@ namespace Lib3MF {
 			public unsafe extern static Int32 BeamLattice_SetMinLength (IntPtr Handle, Double AMinLength);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getclipping", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 BeamLattice_GetClipping (IntPtr Handle, out Int32 AClipMode, out UInt32 AResourceID);
+			public unsafe extern static Int32 BeamLattice_GetClipping (IntPtr Handle, out Int32 AClipMode, out UInt32 AUniqueResourceID);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_setclipping", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 BeamLattice_SetClipping (IntPtr Handle, Int32 AClipMode, UInt32 AResourceID);
+			public unsafe extern static Int32 BeamLattice_SetClipping (IntPtr Handle, Int32 AClipMode, UInt32 AUniqueResourceID);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getrepresentation", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 BeamLattice_GetRepresentation (IntPtr Handle, out Byte AHasRepresentation, out UInt32 AResourceID);
+			public unsafe extern static Int32 BeamLattice_GetRepresentation (IntPtr Handle, out Byte AHasRepresentation, out UInt32 AUniqueResourceID);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_setrepresentation", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 BeamLattice_SetRepresentation (IntPtr Handle, UInt32 AResourceID);
+			public unsafe extern static Int32 BeamLattice_SetRepresentation (IntPtr Handle, UInt32 AUniqueResourceID);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getballoptions", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 BeamLattice_GetBallOptions (IntPtr Handle, out Int32 ABallMode, out Double ABallRadius);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_setballoptions", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 BeamLattice_SetBallOptions (IntPtr Handle, Int32 ABallMode, Double ABallRadius);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getbeamcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetBeamCount (IntPtr Handle, out UInt32 ACount);
@@ -556,6 +650,24 @@ namespace Lib3MF {
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getbeams", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetBeams (IntPtr Handle, UInt64 sizeBeamInfo, out UInt64 neededBeamInfo, IntPtr dataBeamInfo);
 
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getballcount", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 BeamLattice_GetBallCount (IntPtr Handle, out UInt32 ACount);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getball", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 BeamLattice_GetBall (IntPtr Handle, UInt32 AIndex, out InternalBall ABallInfo);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_addball", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 BeamLattice_AddBall (IntPtr Handle, InternalBall ABallInfo, out UInt32 AIndex);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_setball", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 BeamLattice_SetBall (IntPtr Handle, UInt32 AIndex, InternalBall ABallInfo);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_setballs", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 BeamLattice_SetBalls (IntPtr Handle, UInt64 sizeBallInfo, IntPtr dataBallInfo);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getballs", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 BeamLattice_GetBalls (IntPtr Handle, UInt64 sizeBallInfo, out UInt64 neededBallInfo, IntPtr dataBallInfo);
+
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getbeamsetcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetBeamSetCount (IntPtr Handle, out UInt32 ACount);
 
@@ -569,7 +681,7 @@ namespace Lib3MF {
 			public unsafe extern static Int32 Component_GetObjectResource (IntPtr Handle, out IntPtr AObjectResource);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_component_getobjectresourceid", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 Component_GetObjectResourceID (IntPtr Handle, out UInt32 AObjectResourceID);
+			public unsafe extern static Int32 Component_GetObjectResourceID (IntPtr Handle, out UInt32 AUniqueResourceID);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_component_getuuid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Component_GetUUID (IntPtr Handle, out Byte AHasUUID, UInt32 sizeUUID, out UInt32 neededUUID, IntPtr dataUUID);
@@ -615,6 +727,15 @@ namespace Lib3MF {
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamset_getreferences", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamSet_GetReferences (IntPtr Handle, UInt64 sizeReferences, out UInt64 neededReferences, IntPtr dataReferences);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamset_getballreferencecount", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 BeamSet_GetBallReferenceCount (IntPtr Handle, out UInt32 ACount);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamset_setballreferences", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 BeamSet_SetBallReferences (IntPtr Handle, UInt64 sizeBallReferences, IntPtr dataBallReferences);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamset_getballreferences", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 BeamSet_GetBallReferences (IntPtr Handle, UInt64 sizeBallReferences, out UInt64 neededBallReferences, IntPtr dataBallReferences);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_basematerialgroup_getcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BaseMaterialGroup_GetCount (IntPtr Handle, out UInt32 ACount);
@@ -730,6 +851,9 @@ namespace Lib3MF {
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_attachment_setpath", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Attachment_SetPath (IntPtr Handle, byte[] APath);
 
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_attachment_packagepart", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Attachment_PackagePart (IntPtr Handle, out IntPtr APackagePart);
+
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_attachment_getrelationshiptype", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Attachment_GetRelationShipType (IntPtr Handle, UInt32 sizePath, out UInt32 neededPath, IntPtr dataPath);
 
@@ -785,7 +909,7 @@ namespace Lib3MF {
 			public unsafe extern static Int32 BuildItem_SetUUID (IntPtr Handle, byte[] AUUID);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditem_getobjectresourceid", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 BuildItem_GetObjectResourceID (IntPtr Handle, out UInt32 AId);
+			public unsafe extern static Int32 BuildItem_GetObjectResourceID (IntPtr Handle, out UInt32 AUniqueResourceID);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditem_hasobjecttransform", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItem_HasObjectTransform (IntPtr Handle, out Byte AHasTransform);
@@ -880,6 +1004,132 @@ namespace Lib3MF {
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slicestack_getownpath", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 SliceStack_GetOwnPath (IntPtr Handle, UInt32 sizePath, out UInt32 neededPath, IntPtr dataPath);
 
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_consumer_getconsumerid", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Consumer_GetConsumerID (IntPtr Handle, UInt32 sizeConsumerID, out UInt32 neededConsumerID, IntPtr dataConsumerID);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_consumer_getkeyid", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Consumer_GetKeyID (IntPtr Handle, UInt32 sizeKeyID, out UInt32 neededKeyID, IntPtr dataKeyID);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_consumer_getkeyvalue", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Consumer_GetKeyValue (IntPtr Handle, UInt32 sizeKeyValue, out UInt32 neededKeyValue, IntPtr dataKeyValue);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_accessright_getconsumer", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 AccessRight_GetConsumer (IntPtr Handle, out IntPtr AConsumer);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_accessright_getwrappingalgorithm", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 AccessRight_GetWrappingAlgorithm (IntPtr Handle, out Int32 AAlgorithm);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_accessright_getmgfalgorithm", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 AccessRight_GetMgfAlgorithm (IntPtr Handle, out Int32 AAlgorithm);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_accessright_getdigestmethod", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 AccessRight_GetDigestMethod (IntPtr Handle, out Int32 AAlgorithm);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_getencryptionalgorithm", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ContentEncryptionParams_GetEncryptionAlgorithm (IntPtr Handle, out Int32 AAlgorithm);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_getkey", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ContentEncryptionParams_GetKey (IntPtr Handle, UInt64 sizeByteData, out UInt64 neededByteData, IntPtr dataByteData);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_getinitializationvector", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ContentEncryptionParams_GetInitializationVector (IntPtr Handle, UInt64 sizeByteData, out UInt64 neededByteData, IntPtr dataByteData);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_getauthenticationtag", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ContentEncryptionParams_GetAuthenticationTag (IntPtr Handle, UInt64 sizeByteData, out UInt64 neededByteData, IntPtr dataByteData);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_setauthenticationtag", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ContentEncryptionParams_SetAuthenticationTag (IntPtr Handle, UInt64 sizeByteData, IntPtr dataByteData);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_getadditionalauthenticationdata", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ContentEncryptionParams_GetAdditionalAuthenticationData (IntPtr Handle, UInt64 sizeByteData, out UInt64 neededByteData, IntPtr dataByteData);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_getdescriptor", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ContentEncryptionParams_GetDescriptor (IntPtr Handle, out UInt64 ADescriptor);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_getkeyuuid", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ContentEncryptionParams_GetKeyUUID (IntPtr Handle, UInt32 sizeUUID, out UInt32 neededUUID, IntPtr dataUUID);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedata_getpath", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ResourceData_GetPath (IntPtr Handle, out IntPtr APath);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedata_getencryptionalgorithm", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ResourceData_GetEncryptionAlgorithm (IntPtr Handle, out Int32 AEncryptionAlgorithm);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedata_getcompression", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ResourceData_GetCompression (IntPtr Handle, out Int32 ACompression);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedata_getadditionalauthenticationdata", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ResourceData_GetAdditionalAuthenticationData (IntPtr Handle, UInt64 sizeByteData, out UInt64 neededByteData, IntPtr dataByteData);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedatagroup_getkeyuuid", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ResourceDataGroup_GetKeyUUID (IntPtr Handle, UInt32 sizeUUID, out UInt32 neededUUID, IntPtr dataUUID);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedatagroup_addaccessright", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ResourceDataGroup_AddAccessRight (IntPtr Handle, IntPtr AConsumer, Int32 AWrappingAlgorithm, Int32 AMgfAlgorithm, Int32 ADigestMethod, out IntPtr ATheAccessRight);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedatagroup_findaccessrightbyconsumer", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ResourceDataGroup_FindAccessRightByConsumer (IntPtr Handle, IntPtr AConsumer, out IntPtr ATheAccessRight);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedatagroup_removeaccessright", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 ResourceDataGroup_RemoveAccessRight (IntPtr Handle, IntPtr AConsumer);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_addconsumer", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_AddConsumer (IntPtr Handle, byte[] AConsumerID, byte[] AKeyID, byte[] AKeyValue, out IntPtr AConsumer);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_getconsumercount", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_GetConsumerCount (IntPtr Handle, out UInt64 ACount);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_getconsumer", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_GetConsumer (IntPtr Handle, UInt64 AConsumerIndex, out IntPtr AConsumer);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_removeconsumer", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_RemoveConsumer (IntPtr Handle, IntPtr AConsumer);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_findconsumer", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_FindConsumer (IntPtr Handle, byte[] AConsumerID, out IntPtr AConsumer);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_getresourcedatagroupcount", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_GetResourceDataGroupCount (IntPtr Handle, out UInt64 ACount);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_addresourcedatagroup", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_AddResourceDataGroup (IntPtr Handle, out IntPtr AResourceDataGroup);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_getresourcedatagroup", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_GetResourceDataGroup (IntPtr Handle, UInt64 AResourceDataIndex, out IntPtr AResourceDataGroup);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_removeresourcedatagroup", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_RemoveResourceDataGroup (IntPtr Handle, IntPtr AResourceDataGroup);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_findresourcedatagroup", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_FindResourceDataGroup (IntPtr Handle, IntPtr APartPath, out IntPtr AResourceDataGroup);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_addresourcedata", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_AddResourceData (IntPtr Handle, IntPtr AResourceDataGroup, IntPtr APartPath, Int32 AAlgorithm, Int32 ACompression, UInt64 sizeAdditionalAuthenticationData, IntPtr dataAdditionalAuthenticationData, out IntPtr AResourceData);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_removeresourcedata", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_RemoveResourceData (IntPtr Handle, IntPtr AResourceData);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_findresourcedata", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_FindResourceData (IntPtr Handle, IntPtr AResourcePath, out IntPtr AResourceData);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_getresourcedatacount", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_GetResourceDataCount (IntPtr Handle, out UInt64 ACount);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_getresourcedata", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_GetResourceData (IntPtr Handle, UInt64 AResourceDataIndex, out IntPtr AResourceData);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_getuuid", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_GetUUID (IntPtr Handle, out Byte AHasUUID, UInt32 sizeUUID, out UInt32 neededUUID, IntPtr dataUUID);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_setuuid", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 KeyStore_SetUUID (IntPtr Handle, byte[] AUUID);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_rootmodelpart", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Model_RootModelPart (IntPtr Handle, out IntPtr ARootModelPart);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_findorcreatepackagepart", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Model_FindOrCreatePackagePart (IntPtr Handle, byte[] AAbsolutePath, out IntPtr AModelPart);
+
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_setunit", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_SetUnit (IntPtr Handle, Int32 AUnit);
 
@@ -899,34 +1149,34 @@ namespace Lib3MF {
 			public unsafe extern static Int32 Model_QueryReader (IntPtr Handle, byte[] AReaderClass, out IntPtr AReaderInstance);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_gettexture2dbyid", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 Model_GetTexture2DByID (IntPtr Handle, UInt32 AResourceID, out IntPtr ATextureInstance);
+			public unsafe extern static Int32 Model_GetTexture2DByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr ATextureInstance);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getpropertytypebyid", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 Model_GetPropertyTypeByID (IntPtr Handle, UInt32 AResourceID, out Int32 AThePropertyType);
+			public unsafe extern static Int32 Model_GetPropertyTypeByID (IntPtr Handle, UInt32 AUniqueResourceID, out Int32 AThePropertyType);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getbasematerialgroupbyid", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 Model_GetBaseMaterialGroupByID (IntPtr Handle, UInt32 AResourceID, out IntPtr ABaseMaterialGroupInstance);
+			public unsafe extern static Int32 Model_GetBaseMaterialGroupByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr ABaseMaterialGroupInstance);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_gettexture2dgroupbyid", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 Model_GetTexture2DGroupByID (IntPtr Handle, UInt32 AResourceID, out IntPtr ATexture2DGroupInstance);
+			public unsafe extern static Int32 Model_GetTexture2DGroupByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr ATexture2DGroupInstance);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getcompositematerialsbyid", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 Model_GetCompositeMaterialsByID (IntPtr Handle, UInt32 AResourceID, out IntPtr ACompositeMaterialsInstance);
+			public unsafe extern static Int32 Model_GetCompositeMaterialsByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr ACompositeMaterialsInstance);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getmultipropertygroupbyid", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 Model_GetMultiPropertyGroupByID (IntPtr Handle, UInt32 AResourceID, out IntPtr AMultiPropertyGroupInstance);
+			public unsafe extern static Int32 Model_GetMultiPropertyGroupByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr AMultiPropertyGroupInstance);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getmeshobjectbyid", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 Model_GetMeshObjectByID (IntPtr Handle, UInt32 AResourceID, out IntPtr AMeshObjectInstance);
+			public unsafe extern static Int32 Model_GetMeshObjectByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr AMeshObjectInstance);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getcomponentsobjectbyid", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 Model_GetComponentsObjectByID (IntPtr Handle, UInt32 AResourceID, out IntPtr AComponentsObjectInstance);
+			public unsafe extern static Int32 Model_GetComponentsObjectByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr AComponentsObjectInstance);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getcolorgroupbyid", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 Model_GetColorGroupByID (IntPtr Handle, UInt32 AResourceID, out IntPtr AColorGroupInstance);
+			public unsafe extern static Int32 Model_GetColorGroupByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr AColorGroupInstance);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getslicestackbyid", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 Model_GetSliceStackByID (IntPtr Handle, UInt32 AResourceID, out IntPtr ASliceStacInstance);
+			public unsafe extern static Int32 Model_GetSliceStackByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr ASliceStacInstance);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getbuilduuid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetBuildUUID (IntPtr Handle, out Byte AHasUUID, UInt32 sizeUUID, out UInt32 neededUUID, IntPtr dataUUID);
@@ -1044,6 +1294,12 @@ namespace Lib3MF {
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_removecustomcontenttype", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_RemoveCustomContentType (IntPtr Handle, byte[] AExtension);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_setrandomnumbercallback", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Model_SetRandomNumberCallback (IntPtr Handle, IntPtr ATheCallback, UInt64 AUserData);
+
+			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getkeystore", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Model_GetKeyStore (IntPtr Handle, out IntPtr AKeyStore);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_getlibraryversion", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 GetLibraryVersion (out UInt32 AMajor, out UInt32 AMinor, out UInt32 AMicro);
@@ -1348,6 +1604,22 @@ namespace Lib3MF {
 				return intBeam;
 			}
 
+			public unsafe static sBall convertInternalToStruct_Ball (InternalBall intBall)
+			{
+				sBall Ball;
+				Ball.Index = intBall.Index;
+				Ball.Radius = intBall.Radius;
+				return Ball;
+			}
+
+			public unsafe static InternalBall convertStructToInternal_Ball (sBall Ball)
+			{
+				InternalBall intBall;
+				intBall.Index = Ball.Index;
+				intBall.Radius = Ball.Radius;
+				return intBall;
+			}
+
 			public static void ThrowError(IntPtr Handle, Int32 errorCode)
 			{
 				String sMessage = "Lib3MF Error";
@@ -1468,6 +1740,55 @@ namespace Lib3MF {
 			CheckError(Internal.Lib3MFWrapper.Writer_SetDecimalPrecision (Handle, ADecimalPrecision));
 		}
 
+		public void SetStrictModeActive (bool AStrictModeActive)
+		{
+
+			CheckError(Internal.Lib3MFWrapper.Writer_SetStrictModeActive (Handle, (Byte)( AStrictModeActive ? 1 : 0 )));
+		}
+
+		public bool GetStrictModeActive ()
+		{
+			Byte resultStrictModeActive = 0;
+
+			CheckError(Internal.Lib3MFWrapper.Writer_GetStrictModeActive (Handle, out resultStrictModeActive));
+			return (resultStrictModeActive != 0);
+		}
+
+		public String GetWarning (UInt32 AIndex, out UInt32 AErrorCode)
+		{
+			UInt32 sizeWarning = 0;
+			UInt32 neededWarning = 0;
+			CheckError(Internal.Lib3MFWrapper.Writer_GetWarning (Handle, AIndex, out AErrorCode, sizeWarning, out neededWarning, IntPtr.Zero));
+			sizeWarning = neededWarning;
+			byte[] bytesWarning = new byte[sizeWarning];
+			GCHandle dataWarning = GCHandle.Alloc(bytesWarning, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.Writer_GetWarning (Handle, AIndex, out AErrorCode, sizeWarning, out neededWarning, dataWarning.AddrOfPinnedObject()));
+			dataWarning.Free();
+			return Encoding.UTF8.GetString(bytesWarning).TrimEnd(char.MinValue);
+		}
+
+		public UInt32 GetWarningCount ()
+		{
+			UInt32 resultCount = 0;
+
+			CheckError(Internal.Lib3MFWrapper.Writer_GetWarningCount (Handle, out resultCount));
+			return resultCount;
+		}
+
+		public void AddKeyWrappingCallback (String AConsumerID, IntPtr ATheCallback, UInt64 AUserData)
+		{
+			byte[] byteConsumerID = Encoding.UTF8.GetBytes(AConsumerID + char.MinValue);
+
+			CheckError(Internal.Lib3MFWrapper.Writer_AddKeyWrappingCallback (Handle, byteConsumerID, IntPtr.Zero, AUserData));
+		}
+
+		public void SetContentEncryptionCallback (IntPtr ATheCallback, UInt64 AUserData)
+		{
+
+			CheckError(Internal.Lib3MFWrapper.Writer_SetContentEncryptionCallback (Handle, IntPtr.Zero, AUserData));
+		}
+
 	}
 
 	class CReader : CBase
@@ -1553,6 +1874,48 @@ namespace Lib3MF {
 			return resultCount;
 		}
 
+		public void AddKeyWrappingCallback (String AConsumerID, IntPtr ATheCallback, UInt64 AUserData)
+		{
+			byte[] byteConsumerID = Encoding.UTF8.GetBytes(AConsumerID + char.MinValue);
+
+			CheckError(Internal.Lib3MFWrapper.Reader_AddKeyWrappingCallback (Handle, byteConsumerID, IntPtr.Zero, AUserData));
+		}
+
+		public void SetContentEncryptionCallback (IntPtr ATheCallback, UInt64 AUserData)
+		{
+
+			CheckError(Internal.Lib3MFWrapper.Reader_SetContentEncryptionCallback (Handle, IntPtr.Zero, AUserData));
+		}
+
+	}
+
+	class CPackagePart : CBase
+	{
+		public CPackagePart (IntPtr NewHandle) : base (NewHandle)
+		{
+		}
+
+		public String GetPath ()
+		{
+			UInt32 sizePath = 0;
+			UInt32 neededPath = 0;
+			CheckError(Internal.Lib3MFWrapper.PackagePart_GetPath (Handle, sizePath, out neededPath, IntPtr.Zero));
+			sizePath = neededPath;
+			byte[] bytesPath = new byte[sizePath];
+			GCHandle dataPath = GCHandle.Alloc(bytesPath, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.PackagePart_GetPath (Handle, sizePath, out neededPath, dataPath.AddrOfPinnedObject()));
+			dataPath.Free();
+			return Encoding.UTF8.GetString(bytesPath).TrimEnd(char.MinValue);
+		}
+
+		public void SetPath (String APath)
+		{
+			byte[] bytePath = Encoding.UTF8.GetBytes(APath + char.MinValue);
+
+			CheckError(Internal.Lib3MFWrapper.PackagePart_SetPath (Handle, bytePath));
+		}
+
 	}
 
 	class CResource : CBase
@@ -1563,10 +1926,40 @@ namespace Lib3MF {
 
 		public UInt32 GetResourceID ()
 		{
-			UInt32 resultId = 0;
+			UInt32 resultUniqueResourceID = 0;
 
-			CheckError(Internal.Lib3MFWrapper.Resource_GetResourceID (Handle, out resultId));
-			return resultId;
+			CheckError(Internal.Lib3MFWrapper.Resource_GetResourceID (Handle, out resultUniqueResourceID));
+			return resultUniqueResourceID;
+		}
+
+		public UInt32 GetUniqueResourceID ()
+		{
+			UInt32 resultUniqueResourceID = 0;
+
+			CheckError(Internal.Lib3MFWrapper.Resource_GetUniqueResourceID (Handle, out resultUniqueResourceID));
+			return resultUniqueResourceID;
+		}
+
+		public CPackagePart PackagePart ()
+		{
+			IntPtr newPackagePart = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.Resource_PackagePart (Handle, out newPackagePart));
+			return new CPackagePart (newPackagePart );
+		}
+
+		public void SetPackagePart (CPackagePart APackagePart)
+		{
+
+			CheckError(Internal.Lib3MFWrapper.Resource_SetPackagePart (Handle, APackagePart.GetHandle()));
+		}
+
+		public UInt32 GetModelResourceID ()
+		{
+			UInt32 resultModelResourceId = 0;
+
+			CheckError(Internal.Lib3MFWrapper.Resource_GetModelResourceID (Handle, out resultModelResourceId));
+			return resultModelResourceId;
 		}
 
 	}
@@ -2250,17 +2643,17 @@ namespace Lib3MF {
 				AIndices[index] = Internal.Lib3MFWrapper.convertInternalToStruct_Triangle(arrayIndices[index]);
 		}
 
-		public void SetObjectLevelProperty (UInt32 AResourceID, UInt32 APropertyID)
+		public void SetObjectLevelProperty (UInt32 AUniqueResourceID, UInt32 APropertyID)
 		{
 
-			CheckError(Internal.Lib3MFWrapper.MeshObject_SetObjectLevelProperty (Handle, AResourceID, APropertyID));
+			CheckError(Internal.Lib3MFWrapper.MeshObject_SetObjectLevelProperty (Handle, AUniqueResourceID, APropertyID));
 		}
 
-		public bool GetObjectLevelProperty (out UInt32 AResourceID, out UInt32 APropertyID)
+		public bool GetObjectLevelProperty (out UInt32 AUniqueResourceID, out UInt32 APropertyID)
 		{
 			Byte resultHasObjectLevelProperty = 0;
 
-			CheckError(Internal.Lib3MFWrapper.MeshObject_GetObjectLevelProperty (Handle, out AResourceID, out APropertyID, out resultHasObjectLevelProperty));
+			CheckError(Internal.Lib3MFWrapper.MeshObject_GetObjectLevelProperty (Handle, out AUniqueResourceID, out APropertyID, out resultHasObjectLevelProperty));
 			return (resultHasObjectLevelProperty != 0);
 		}
 
@@ -2323,10 +2716,7 @@ namespace Lib3MF {
 				intdataIndices[index] = Internal.Lib3MFWrapper.convertStructToInternal_Triangle(AIndices[index]);
 			GCHandle dataIndices = GCHandle.Alloc(intdataIndices, GCHandleType.Pinned);
 
-			IntPtr dV = dataVertices.AddrOfPinnedObject();
-			IntPtr dI = dataIndices.AddrOfPinnedObject();
-
-			CheckError(Internal.Lib3MFWrapper.MeshObject_SetGeometry (Handle, (UInt64) AVertices.Length, dV, (UInt64) AIndices.Length, dI));
+			CheckError(Internal.Lib3MFWrapper.MeshObject_SetGeometry (Handle, (UInt64) AVertices.Length, dataVertices.AddrOfPinnedObject(), (UInt64) AIndices.Length, dataIndices.AddrOfPinnedObject()));
 			dataVertices.Free ();
 			dataIndices.Free ();
 		}
@@ -2369,33 +2759,48 @@ namespace Lib3MF {
 			CheckError(Internal.Lib3MFWrapper.BeamLattice_SetMinLength (Handle, AMinLength));
 		}
 
-		public void GetClipping (out eBeamLatticeClipMode AClipMode, out UInt32 AResourceID)
+		public void GetClipping (out eBeamLatticeClipMode AClipMode, out UInt32 AUniqueResourceID)
 		{
 			Int32 resultClipMode = 0;
 
-			CheckError(Internal.Lib3MFWrapper.BeamLattice_GetClipping (Handle, out resultClipMode, out AResourceID));
+			CheckError(Internal.Lib3MFWrapper.BeamLattice_GetClipping (Handle, out resultClipMode, out AUniqueResourceID));
 			AClipMode = (eBeamLatticeClipMode) (resultClipMode);
 		}
 
-		public void SetClipping (eBeamLatticeClipMode AClipMode, UInt32 AResourceID)
+		public void SetClipping (eBeamLatticeClipMode AClipMode, UInt32 AUniqueResourceID)
 		{
 			Int32 enumClipMode = (Int32) AClipMode;
 
-			CheckError(Internal.Lib3MFWrapper.BeamLattice_SetClipping (Handle, enumClipMode, AResourceID));
+			CheckError(Internal.Lib3MFWrapper.BeamLattice_SetClipping (Handle, enumClipMode, AUniqueResourceID));
 		}
 
-		public bool GetRepresentation (out UInt32 AResourceID)
+		public bool GetRepresentation (out UInt32 AUniqueResourceID)
 		{
 			Byte resultHasRepresentation = 0;
 
-			CheckError(Internal.Lib3MFWrapper.BeamLattice_GetRepresentation (Handle, out resultHasRepresentation, out AResourceID));
+			CheckError(Internal.Lib3MFWrapper.BeamLattice_GetRepresentation (Handle, out resultHasRepresentation, out AUniqueResourceID));
 			return (resultHasRepresentation != 0);
 		}
 
-		public void SetRepresentation (UInt32 AResourceID)
+		public void SetRepresentation (UInt32 AUniqueResourceID)
 		{
 
-			CheckError(Internal.Lib3MFWrapper.BeamLattice_SetRepresentation (Handle, AResourceID));
+			CheckError(Internal.Lib3MFWrapper.BeamLattice_SetRepresentation (Handle, AUniqueResourceID));
+		}
+
+		public void GetBallOptions (out eBeamLatticeBallMode ABallMode, out Double ABallRadius)
+		{
+			Int32 resultBallMode = 0;
+
+			CheckError(Internal.Lib3MFWrapper.BeamLattice_GetBallOptions (Handle, out resultBallMode, out ABallRadius));
+			ABallMode = (eBeamLatticeBallMode) (resultBallMode);
+		}
+
+		public void SetBallOptions (eBeamLatticeBallMode ABallMode, Double ABallRadius)
+		{
+			Int32 enumBallMode = (Int32) ABallMode;
+
+			CheckError(Internal.Lib3MFWrapper.BeamLattice_SetBallOptions (Handle, enumBallMode, ABallRadius));
 		}
 
 		public UInt32 GetBeamCount ()
@@ -2457,6 +2862,65 @@ namespace Lib3MF {
 				ABeamInfo[index] = Internal.Lib3MFWrapper.convertInternalToStruct_Beam(arrayBeamInfo[index]);
 		}
 
+		public UInt32 GetBallCount ()
+		{
+			UInt32 resultCount = 0;
+
+			CheckError(Internal.Lib3MFWrapper.BeamLattice_GetBallCount (Handle, out resultCount));
+			return resultCount;
+		}
+
+		public sBall GetBall (UInt32 AIndex)
+		{
+			Internal.InternalBall intresultBallInfo;
+
+			CheckError(Internal.Lib3MFWrapper.BeamLattice_GetBall (Handle, AIndex, out intresultBallInfo));
+			return Internal.Lib3MFWrapper.convertInternalToStruct_Ball (intresultBallInfo);
+		}
+
+		public UInt32 AddBall (sBall ABallInfo)
+		{
+			Internal.InternalBall intBallInfo = Internal.Lib3MFWrapper.convertStructToInternal_Ball (ABallInfo);
+			UInt32 resultIndex = 0;
+
+			CheckError(Internal.Lib3MFWrapper.BeamLattice_AddBall (Handle, intBallInfo, out resultIndex));
+			return resultIndex;
+		}
+
+		public void SetBall (UInt32 AIndex, sBall ABallInfo)
+		{
+			Internal.InternalBall intBallInfo = Internal.Lib3MFWrapper.convertStructToInternal_Ball (ABallInfo);
+
+			CheckError(Internal.Lib3MFWrapper.BeamLattice_SetBall (Handle, AIndex, intBallInfo));
+		}
+
+		public void SetBalls (sBall[] ABallInfo)
+		{
+			Internal.InternalBall[] intdataBallInfo = new Internal.InternalBall[ABallInfo.Length];
+			for (int index = 0; index < ABallInfo.Length; index++)
+				intdataBallInfo[index] = Internal.Lib3MFWrapper.convertStructToInternal_Ball(ABallInfo[index]);
+			GCHandle dataBallInfo = GCHandle.Alloc(intdataBallInfo, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.BeamLattice_SetBalls (Handle, (UInt64) ABallInfo.Length, dataBallInfo.AddrOfPinnedObject()));
+			dataBallInfo.Free ();
+		}
+
+		public void GetBalls (out sBall[] ABallInfo)
+		{
+			UInt64 sizeBallInfo = 0;
+			UInt64 neededBallInfo = 0;
+			CheckError(Internal.Lib3MFWrapper.BeamLattice_GetBalls (Handle, sizeBallInfo, out neededBallInfo, IntPtr.Zero));
+			sizeBallInfo = neededBallInfo;
+			var arrayBallInfo = new Internal.InternalBall[sizeBallInfo];
+			GCHandle dataBallInfo = GCHandle.Alloc(arrayBallInfo, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.BeamLattice_GetBalls (Handle, sizeBallInfo, out neededBallInfo, dataBallInfo.AddrOfPinnedObject()));
+			dataBallInfo.Free();
+			ABallInfo = new sBall[sizeBallInfo];
+			for (int index = 0; index < ABallInfo.Length; index++)
+				ABallInfo[index] = Internal.Lib3MFWrapper.convertInternalToStruct_Ball(arrayBallInfo[index]);
+		}
+
 		public UInt32 GetBeamSetCount ()
 		{
 			UInt32 resultCount = 0;
@@ -2499,10 +2963,10 @@ namespace Lib3MF {
 
 		public UInt32 GetObjectResourceID ()
 		{
-			UInt32 resultObjectResourceID = 0;
+			UInt32 resultUniqueResourceID = 0;
 
-			CheckError(Internal.Lib3MFWrapper.Component_GetObjectResourceID (Handle, out resultObjectResourceID));
-			return resultObjectResourceID;
+			CheckError(Internal.Lib3MFWrapper.Component_GetObjectResourceID (Handle, out resultUniqueResourceID));
+			return resultUniqueResourceID;
 		}
 
 		public String GetUUID (out bool AHasUUID)
@@ -2661,6 +3125,35 @@ namespace Lib3MF {
 
 			CheckError(Internal.Lib3MFWrapper.BeamSet_GetReferences (Handle, sizeReferences, out neededReferences, dataReferences.AddrOfPinnedObject()));
 			dataReferences.Free();
+		}
+
+		public UInt32 GetBallReferenceCount ()
+		{
+			UInt32 resultCount = 0;
+
+			CheckError(Internal.Lib3MFWrapper.BeamSet_GetBallReferenceCount (Handle, out resultCount));
+			return resultCount;
+		}
+
+		public void SetBallReferences (UInt32[] ABallReferences)
+		{
+			GCHandle dataBallReferences = GCHandle.Alloc(ABallReferences, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.BeamSet_SetBallReferences (Handle, (UInt64) ABallReferences.Length, dataBallReferences.AddrOfPinnedObject()));
+			dataBallReferences.Free ();
+		}
+
+		public void GetBallReferences (out UInt32[] ABallReferences)
+		{
+			UInt64 sizeBallReferences = 0;
+			UInt64 neededBallReferences = 0;
+			CheckError(Internal.Lib3MFWrapper.BeamSet_GetBallReferences (Handle, sizeBallReferences, out neededBallReferences, IntPtr.Zero));
+			sizeBallReferences = neededBallReferences;
+			ABallReferences = new UInt32[sizeBallReferences];
+			GCHandle dataBallReferences = GCHandle.Alloc(ABallReferences, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.BeamSet_GetBallReferences (Handle, sizeBallReferences, out neededBallReferences, dataBallReferences.AddrOfPinnedObject()));
+			dataBallReferences.Free();
 		}
 
 	}
@@ -3061,6 +3554,14 @@ namespace Lib3MF {
 			CheckError(Internal.Lib3MFWrapper.Attachment_SetPath (Handle, bytePath));
 		}
 
+		public CPackagePart PackagePart ()
+		{
+			IntPtr newPackagePart = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.Attachment_PackagePart (Handle, out newPackagePart));
+			return new CPackagePart (newPackagePart );
+		}
+
 		public String GetRelationShipType ()
 		{
 			UInt32 sizePath = 0;
@@ -3236,10 +3737,10 @@ namespace Lib3MF {
 
 		public UInt32 GetObjectResourceID ()
 		{
-			UInt32 resultId = 0;
+			UInt32 resultUniqueResourceID = 0;
 
-			CheckError(Internal.Lib3MFWrapper.BuildItem_GetObjectResourceID (Handle, out resultId));
-			return resultId;
+			CheckError(Internal.Lib3MFWrapper.BuildItem_GetObjectResourceID (Handle, out resultUniqueResourceID));
+			return resultUniqueResourceID;
 		}
 
 		public bool HasObjectTransform ()
@@ -3539,10 +4040,460 @@ namespace Lib3MF {
 
 	}
 
+	class CConsumer : CBase
+	{
+		public CConsumer (IntPtr NewHandle) : base (NewHandle)
+		{
+		}
+
+		public String GetConsumerID ()
+		{
+			UInt32 sizeConsumerID = 0;
+			UInt32 neededConsumerID = 0;
+			CheckError(Internal.Lib3MFWrapper.Consumer_GetConsumerID (Handle, sizeConsumerID, out neededConsumerID, IntPtr.Zero));
+			sizeConsumerID = neededConsumerID;
+			byte[] bytesConsumerID = new byte[sizeConsumerID];
+			GCHandle dataConsumerID = GCHandle.Alloc(bytesConsumerID, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.Consumer_GetConsumerID (Handle, sizeConsumerID, out neededConsumerID, dataConsumerID.AddrOfPinnedObject()));
+			dataConsumerID.Free();
+			return Encoding.UTF8.GetString(bytesConsumerID).TrimEnd(char.MinValue);
+		}
+
+		public String GetKeyID ()
+		{
+			UInt32 sizeKeyID = 0;
+			UInt32 neededKeyID = 0;
+			CheckError(Internal.Lib3MFWrapper.Consumer_GetKeyID (Handle, sizeKeyID, out neededKeyID, IntPtr.Zero));
+			sizeKeyID = neededKeyID;
+			byte[] bytesKeyID = new byte[sizeKeyID];
+			GCHandle dataKeyID = GCHandle.Alloc(bytesKeyID, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.Consumer_GetKeyID (Handle, sizeKeyID, out neededKeyID, dataKeyID.AddrOfPinnedObject()));
+			dataKeyID.Free();
+			return Encoding.UTF8.GetString(bytesKeyID).TrimEnd(char.MinValue);
+		}
+
+		public String GetKeyValue ()
+		{
+			UInt32 sizeKeyValue = 0;
+			UInt32 neededKeyValue = 0;
+			CheckError(Internal.Lib3MFWrapper.Consumer_GetKeyValue (Handle, sizeKeyValue, out neededKeyValue, IntPtr.Zero));
+			sizeKeyValue = neededKeyValue;
+			byte[] bytesKeyValue = new byte[sizeKeyValue];
+			GCHandle dataKeyValue = GCHandle.Alloc(bytesKeyValue, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.Consumer_GetKeyValue (Handle, sizeKeyValue, out neededKeyValue, dataKeyValue.AddrOfPinnedObject()));
+			dataKeyValue.Free();
+			return Encoding.UTF8.GetString(bytesKeyValue).TrimEnd(char.MinValue);
+		}
+
+	}
+
+	class CAccessRight : CBase
+	{
+		public CAccessRight (IntPtr NewHandle) : base (NewHandle)
+		{
+		}
+
+		public CConsumer GetConsumer ()
+		{
+			IntPtr newConsumer = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.AccessRight_GetConsumer (Handle, out newConsumer));
+			return new CConsumer (newConsumer );
+		}
+
+		public eWrappingAlgorithm GetWrappingAlgorithm ()
+		{
+			Int32 resultAlgorithm = 0;
+
+			CheckError(Internal.Lib3MFWrapper.AccessRight_GetWrappingAlgorithm (Handle, out resultAlgorithm));
+			return (eWrappingAlgorithm) (resultAlgorithm);
+		}
+
+		public eMgfAlgorithm GetMgfAlgorithm ()
+		{
+			Int32 resultAlgorithm = 0;
+
+			CheckError(Internal.Lib3MFWrapper.AccessRight_GetMgfAlgorithm (Handle, out resultAlgorithm));
+			return (eMgfAlgorithm) (resultAlgorithm);
+		}
+
+		public eDigestMethod GetDigestMethod ()
+		{
+			Int32 resultAlgorithm = 0;
+
+			CheckError(Internal.Lib3MFWrapper.AccessRight_GetDigestMethod (Handle, out resultAlgorithm));
+			return (eDigestMethod) (resultAlgorithm);
+		}
+
+	}
+
+	class CContentEncryptionParams : CBase
+	{
+		public CContentEncryptionParams (IntPtr NewHandle) : base (NewHandle)
+		{
+		}
+
+		public eEncryptionAlgorithm GetEncryptionAlgorithm ()
+		{
+			Int32 resultAlgorithm = 0;
+
+			CheckError(Internal.Lib3MFWrapper.ContentEncryptionParams_GetEncryptionAlgorithm (Handle, out resultAlgorithm));
+			return (eEncryptionAlgorithm) (resultAlgorithm);
+		}
+
+		public void GetKey (out Byte[] AByteData)
+		{
+			UInt64 sizeByteData = 0;
+			UInt64 neededByteData = 0;
+			CheckError(Internal.Lib3MFWrapper.ContentEncryptionParams_GetKey (Handle, sizeByteData, out neededByteData, IntPtr.Zero));
+			sizeByteData = neededByteData;
+			AByteData = new Byte[sizeByteData];
+			GCHandle dataByteData = GCHandle.Alloc(AByteData, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.ContentEncryptionParams_GetKey (Handle, sizeByteData, out neededByteData, dataByteData.AddrOfPinnedObject()));
+			dataByteData.Free();
+		}
+
+		public void GetInitializationVector (out Byte[] AByteData)
+		{
+			UInt64 sizeByteData = 0;
+			UInt64 neededByteData = 0;
+			CheckError(Internal.Lib3MFWrapper.ContentEncryptionParams_GetInitializationVector (Handle, sizeByteData, out neededByteData, IntPtr.Zero));
+			sizeByteData = neededByteData;
+			AByteData = new Byte[sizeByteData];
+			GCHandle dataByteData = GCHandle.Alloc(AByteData, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.ContentEncryptionParams_GetInitializationVector (Handle, sizeByteData, out neededByteData, dataByteData.AddrOfPinnedObject()));
+			dataByteData.Free();
+		}
+
+		public void GetAuthenticationTag (out Byte[] AByteData)
+		{
+			UInt64 sizeByteData = 0;
+			UInt64 neededByteData = 0;
+			CheckError(Internal.Lib3MFWrapper.ContentEncryptionParams_GetAuthenticationTag (Handle, sizeByteData, out neededByteData, IntPtr.Zero));
+			sizeByteData = neededByteData;
+			AByteData = new Byte[sizeByteData];
+			GCHandle dataByteData = GCHandle.Alloc(AByteData, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.ContentEncryptionParams_GetAuthenticationTag (Handle, sizeByteData, out neededByteData, dataByteData.AddrOfPinnedObject()));
+			dataByteData.Free();
+		}
+
+		public void SetAuthenticationTag (Byte[] AByteData)
+		{
+			GCHandle dataByteData = GCHandle.Alloc(AByteData, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.ContentEncryptionParams_SetAuthenticationTag (Handle, (UInt64) AByteData.Length, dataByteData.AddrOfPinnedObject()));
+			dataByteData.Free ();
+		}
+
+		public void GetAdditionalAuthenticationData (out Byte[] AByteData)
+		{
+			UInt64 sizeByteData = 0;
+			UInt64 neededByteData = 0;
+			CheckError(Internal.Lib3MFWrapper.ContentEncryptionParams_GetAdditionalAuthenticationData (Handle, sizeByteData, out neededByteData, IntPtr.Zero));
+			sizeByteData = neededByteData;
+			AByteData = new Byte[sizeByteData];
+			GCHandle dataByteData = GCHandle.Alloc(AByteData, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.ContentEncryptionParams_GetAdditionalAuthenticationData (Handle, sizeByteData, out neededByteData, dataByteData.AddrOfPinnedObject()));
+			dataByteData.Free();
+		}
+
+		public UInt64 GetDescriptor ()
+		{
+			UInt64 resultDescriptor = 0;
+
+			CheckError(Internal.Lib3MFWrapper.ContentEncryptionParams_GetDescriptor (Handle, out resultDescriptor));
+			return resultDescriptor;
+		}
+
+		public String GetKeyUUID ()
+		{
+			UInt32 sizeUUID = 0;
+			UInt32 neededUUID = 0;
+			CheckError(Internal.Lib3MFWrapper.ContentEncryptionParams_GetKeyUUID (Handle, sizeUUID, out neededUUID, IntPtr.Zero));
+			sizeUUID = neededUUID;
+			byte[] bytesUUID = new byte[sizeUUID];
+			GCHandle dataUUID = GCHandle.Alloc(bytesUUID, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.ContentEncryptionParams_GetKeyUUID (Handle, sizeUUID, out neededUUID, dataUUID.AddrOfPinnedObject()));
+			dataUUID.Free();
+			return Encoding.UTF8.GetString(bytesUUID).TrimEnd(char.MinValue);
+		}
+
+	}
+
+	class CResourceData : CBase
+	{
+		public CResourceData (IntPtr NewHandle) : base (NewHandle)
+		{
+		}
+
+		public CPackagePart GetPath ()
+		{
+			IntPtr newPath = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.ResourceData_GetPath (Handle, out newPath));
+			return new CPackagePart (newPath );
+		}
+
+		public eEncryptionAlgorithm GetEncryptionAlgorithm ()
+		{
+			Int32 resultEncryptionAlgorithm = 0;
+
+			CheckError(Internal.Lib3MFWrapper.ResourceData_GetEncryptionAlgorithm (Handle, out resultEncryptionAlgorithm));
+			return (eEncryptionAlgorithm) (resultEncryptionAlgorithm);
+		}
+
+		public eCompression GetCompression ()
+		{
+			Int32 resultCompression = 0;
+
+			CheckError(Internal.Lib3MFWrapper.ResourceData_GetCompression (Handle, out resultCompression));
+			return (eCompression) (resultCompression);
+		}
+
+		public void GetAdditionalAuthenticationData (out Byte[] AByteData)
+		{
+			UInt64 sizeByteData = 0;
+			UInt64 neededByteData = 0;
+			CheckError(Internal.Lib3MFWrapper.ResourceData_GetAdditionalAuthenticationData (Handle, sizeByteData, out neededByteData, IntPtr.Zero));
+			sizeByteData = neededByteData;
+			AByteData = new Byte[sizeByteData];
+			GCHandle dataByteData = GCHandle.Alloc(AByteData, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.ResourceData_GetAdditionalAuthenticationData (Handle, sizeByteData, out neededByteData, dataByteData.AddrOfPinnedObject()));
+			dataByteData.Free();
+		}
+
+	}
+
+	class CResourceDataGroup : CBase
+	{
+		public CResourceDataGroup (IntPtr NewHandle) : base (NewHandle)
+		{
+		}
+
+		public String GetKeyUUID ()
+		{
+			UInt32 sizeUUID = 0;
+			UInt32 neededUUID = 0;
+			CheckError(Internal.Lib3MFWrapper.ResourceDataGroup_GetKeyUUID (Handle, sizeUUID, out neededUUID, IntPtr.Zero));
+			sizeUUID = neededUUID;
+			byte[] bytesUUID = new byte[sizeUUID];
+			GCHandle dataUUID = GCHandle.Alloc(bytesUUID, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.ResourceDataGroup_GetKeyUUID (Handle, sizeUUID, out neededUUID, dataUUID.AddrOfPinnedObject()));
+			dataUUID.Free();
+			return Encoding.UTF8.GetString(bytesUUID).TrimEnd(char.MinValue);
+		}
+
+		public CAccessRight AddAccessRight (CConsumer AConsumer, eWrappingAlgorithm AWrappingAlgorithm, eMgfAlgorithm AMgfAlgorithm, eDigestMethod ADigestMethod)
+		{
+			Int32 enumWrappingAlgorithm = (Int32) AWrappingAlgorithm;
+			Int32 enumMgfAlgorithm = (Int32) AMgfAlgorithm;
+			Int32 enumDigestMethod = (Int32) ADigestMethod;
+			IntPtr newTheAccessRight = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.ResourceDataGroup_AddAccessRight (Handle, AConsumer.GetHandle(), enumWrappingAlgorithm, enumMgfAlgorithm, enumDigestMethod, out newTheAccessRight));
+			return new CAccessRight (newTheAccessRight );
+		}
+
+		public CAccessRight FindAccessRightByConsumer (CConsumer AConsumer)
+		{
+			IntPtr newTheAccessRight = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.ResourceDataGroup_FindAccessRightByConsumer (Handle, AConsumer.GetHandle(), out newTheAccessRight));
+			return new CAccessRight (newTheAccessRight );
+		}
+
+		public void RemoveAccessRight (CConsumer AConsumer)
+		{
+
+			CheckError(Internal.Lib3MFWrapper.ResourceDataGroup_RemoveAccessRight (Handle, AConsumer.GetHandle()));
+		}
+
+	}
+
+	class CKeyStore : CBase
+	{
+		public CKeyStore (IntPtr NewHandle) : base (NewHandle)
+		{
+		}
+
+		public CConsumer AddConsumer (String AConsumerID, String AKeyID, String AKeyValue)
+		{
+			byte[] byteConsumerID = Encoding.UTF8.GetBytes(AConsumerID + char.MinValue);
+			byte[] byteKeyID = Encoding.UTF8.GetBytes(AKeyID + char.MinValue);
+			byte[] byteKeyValue = Encoding.UTF8.GetBytes(AKeyValue + char.MinValue);
+			IntPtr newConsumer = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_AddConsumer (Handle, byteConsumerID, byteKeyID, byteKeyValue, out newConsumer));
+			return new CConsumer (newConsumer );
+		}
+
+		public UInt64 GetConsumerCount ()
+		{
+			UInt64 resultCount = 0;
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_GetConsumerCount (Handle, out resultCount));
+			return resultCount;
+		}
+
+		public CConsumer GetConsumer (UInt64 AConsumerIndex)
+		{
+			IntPtr newConsumer = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_GetConsumer (Handle, AConsumerIndex, out newConsumer));
+			return new CConsumer (newConsumer );
+		}
+
+		public void RemoveConsumer (CConsumer AConsumer)
+		{
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_RemoveConsumer (Handle, AConsumer.GetHandle()));
+		}
+
+		public CConsumer FindConsumer (String AConsumerID)
+		{
+			byte[] byteConsumerID = Encoding.UTF8.GetBytes(AConsumerID + char.MinValue);
+			IntPtr newConsumer = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_FindConsumer (Handle, byteConsumerID, out newConsumer));
+			return new CConsumer (newConsumer );
+		}
+
+		public UInt64 GetResourceDataGroupCount ()
+		{
+			UInt64 resultCount = 0;
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_GetResourceDataGroupCount (Handle, out resultCount));
+			return resultCount;
+		}
+
+		public CResourceDataGroup AddResourceDataGroup ()
+		{
+			IntPtr newResourceDataGroup = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_AddResourceDataGroup (Handle, out newResourceDataGroup));
+			return new CResourceDataGroup (newResourceDataGroup );
+		}
+
+		public CResourceDataGroup GetResourceDataGroup (UInt64 AResourceDataIndex)
+		{
+			IntPtr newResourceDataGroup = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_GetResourceDataGroup (Handle, AResourceDataIndex, out newResourceDataGroup));
+			return new CResourceDataGroup (newResourceDataGroup );
+		}
+
+		public void RemoveResourceDataGroup (CResourceDataGroup AResourceDataGroup)
+		{
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_RemoveResourceDataGroup (Handle, AResourceDataGroup.GetHandle()));
+		}
+
+		public CResourceDataGroup FindResourceDataGroup (CPackagePart APartPath)
+		{
+			IntPtr newResourceDataGroup = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_FindResourceDataGroup (Handle, APartPath.GetHandle(), out newResourceDataGroup));
+			return new CResourceDataGroup (newResourceDataGroup );
+		}
+
+		public CResourceData AddResourceData (CResourceDataGroup AResourceDataGroup, CPackagePart APartPath, eEncryptionAlgorithm AAlgorithm, eCompression ACompression, Byte[] AAdditionalAuthenticationData)
+		{
+			Int32 enumAlgorithm = (Int32) AAlgorithm;
+			Int32 enumCompression = (Int32) ACompression;
+			GCHandle dataAdditionalAuthenticationData = GCHandle.Alloc(AAdditionalAuthenticationData, GCHandleType.Pinned);
+			IntPtr newResourceData = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_AddResourceData (Handle, AResourceDataGroup.GetHandle(), APartPath.GetHandle(), enumAlgorithm, enumCompression, (UInt64) AAdditionalAuthenticationData.Length, dataAdditionalAuthenticationData.AddrOfPinnedObject(), out newResourceData));
+			dataAdditionalAuthenticationData.Free ();
+			return new CResourceData (newResourceData );
+		}
+
+		public void RemoveResourceData (CResourceData AResourceData)
+		{
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_RemoveResourceData (Handle, AResourceData.GetHandle()));
+		}
+
+		public CResourceData FindResourceData (CPackagePart AResourcePath)
+		{
+			IntPtr newResourceData = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_FindResourceData (Handle, AResourcePath.GetHandle(), out newResourceData));
+			return new CResourceData (newResourceData );
+		}
+
+		public UInt64 GetResourceDataCount ()
+		{
+			UInt64 resultCount = 0;
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_GetResourceDataCount (Handle, out resultCount));
+			return resultCount;
+		}
+
+		public CResourceData GetResourceData (UInt64 AResourceDataIndex)
+		{
+			IntPtr newResourceData = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_GetResourceData (Handle, AResourceDataIndex, out newResourceData));
+			return new CResourceData (newResourceData );
+		}
+
+		public String GetUUID (out bool AHasUUID)
+		{
+			Byte resultHasUUID = 0;
+			UInt32 sizeUUID = 0;
+			UInt32 neededUUID = 0;
+			CheckError(Internal.Lib3MFWrapper.KeyStore_GetUUID (Handle, out resultHasUUID, sizeUUID, out neededUUID, IntPtr.Zero));
+			sizeUUID = neededUUID;
+			byte[] bytesUUID = new byte[sizeUUID];
+			GCHandle dataUUID = GCHandle.Alloc(bytesUUID, GCHandleType.Pinned);
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_GetUUID (Handle, out resultHasUUID, sizeUUID, out neededUUID, dataUUID.AddrOfPinnedObject()));
+			AHasUUID = (resultHasUUID != 0);
+			dataUUID.Free();
+			return Encoding.UTF8.GetString(bytesUUID).TrimEnd(char.MinValue);
+		}
+
+		public void SetUUID (String AUUID)
+		{
+			byte[] byteUUID = Encoding.UTF8.GetBytes(AUUID + char.MinValue);
+
+			CheckError(Internal.Lib3MFWrapper.KeyStore_SetUUID (Handle, byteUUID));
+		}
+
+	}
+
 	class CModel : CBase
 	{
 		public CModel (IntPtr NewHandle) : base (NewHandle)
 		{
+		}
+
+		public CPackagePart RootModelPart ()
+		{
+			IntPtr newRootModelPart = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.Model_RootModelPart (Handle, out newRootModelPart));
+			return new CPackagePart (newRootModelPart );
+		}
+
+		public CPackagePart FindOrCreatePackagePart (String AAbsolutePath)
+		{
+			byte[] byteAbsolutePath = Encoding.UTF8.GetBytes(AAbsolutePath + char.MinValue);
+			IntPtr newModelPart = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.Model_FindOrCreatePackagePart (Handle, byteAbsolutePath, out newModelPart));
+			return new CPackagePart (newModelPart );
 		}
 
 		public void SetUnit (eModelUnit AUnit)
@@ -3599,83 +4550,83 @@ namespace Lib3MF {
 			return new CReader (newReaderInstance );
 		}
 
-		public CTexture2D GetTexture2DByID (UInt32 AResourceID)
+		public CTexture2D GetTexture2DByID (UInt32 AUniqueResourceID)
 		{
 			IntPtr newTextureInstance = IntPtr.Zero;
 
-			CheckError(Internal.Lib3MFWrapper.Model_GetTexture2DByID (Handle, AResourceID, out newTextureInstance));
+			CheckError(Internal.Lib3MFWrapper.Model_GetTexture2DByID (Handle, AUniqueResourceID, out newTextureInstance));
 			return new CTexture2D (newTextureInstance );
 		}
 
-		public ePropertyType GetPropertyTypeByID (UInt32 AResourceID)
+		public ePropertyType GetPropertyTypeByID (UInt32 AUniqueResourceID)
 		{
 			Int32 resultThePropertyType = 0;
 
-			CheckError(Internal.Lib3MFWrapper.Model_GetPropertyTypeByID (Handle, AResourceID, out resultThePropertyType));
+			CheckError(Internal.Lib3MFWrapper.Model_GetPropertyTypeByID (Handle, AUniqueResourceID, out resultThePropertyType));
 			return (ePropertyType) (resultThePropertyType);
 		}
 
-		public CBaseMaterialGroup GetBaseMaterialGroupByID (UInt32 AResourceID)
+		public CBaseMaterialGroup GetBaseMaterialGroupByID (UInt32 AUniqueResourceID)
 		{
 			IntPtr newBaseMaterialGroupInstance = IntPtr.Zero;
 
-			CheckError(Internal.Lib3MFWrapper.Model_GetBaseMaterialGroupByID (Handle, AResourceID, out newBaseMaterialGroupInstance));
+			CheckError(Internal.Lib3MFWrapper.Model_GetBaseMaterialGroupByID (Handle, AUniqueResourceID, out newBaseMaterialGroupInstance));
 			return new CBaseMaterialGroup (newBaseMaterialGroupInstance );
 		}
 
-		public CTexture2DGroup GetTexture2DGroupByID (UInt32 AResourceID)
+		public CTexture2DGroup GetTexture2DGroupByID (UInt32 AUniqueResourceID)
 		{
 			IntPtr newTexture2DGroupInstance = IntPtr.Zero;
 
-			CheckError(Internal.Lib3MFWrapper.Model_GetTexture2DGroupByID (Handle, AResourceID, out newTexture2DGroupInstance));
+			CheckError(Internal.Lib3MFWrapper.Model_GetTexture2DGroupByID (Handle, AUniqueResourceID, out newTexture2DGroupInstance));
 			return new CTexture2DGroup (newTexture2DGroupInstance );
 		}
 
-		public CCompositeMaterials GetCompositeMaterialsByID (UInt32 AResourceID)
+		public CCompositeMaterials GetCompositeMaterialsByID (UInt32 AUniqueResourceID)
 		{
 			IntPtr newCompositeMaterialsInstance = IntPtr.Zero;
 
-			CheckError(Internal.Lib3MFWrapper.Model_GetCompositeMaterialsByID (Handle, AResourceID, out newCompositeMaterialsInstance));
+			CheckError(Internal.Lib3MFWrapper.Model_GetCompositeMaterialsByID (Handle, AUniqueResourceID, out newCompositeMaterialsInstance));
 			return new CCompositeMaterials (newCompositeMaterialsInstance );
 		}
 
-		public CMultiPropertyGroup GetMultiPropertyGroupByID (UInt32 AResourceID)
+		public CMultiPropertyGroup GetMultiPropertyGroupByID (UInt32 AUniqueResourceID)
 		{
 			IntPtr newMultiPropertyGroupInstance = IntPtr.Zero;
 
-			CheckError(Internal.Lib3MFWrapper.Model_GetMultiPropertyGroupByID (Handle, AResourceID, out newMultiPropertyGroupInstance));
+			CheckError(Internal.Lib3MFWrapper.Model_GetMultiPropertyGroupByID (Handle, AUniqueResourceID, out newMultiPropertyGroupInstance));
 			return new CMultiPropertyGroup (newMultiPropertyGroupInstance );
 		}
 
-		public CMeshObject GetMeshObjectByID (UInt32 AResourceID)
+		public CMeshObject GetMeshObjectByID (UInt32 AUniqueResourceID)
 		{
 			IntPtr newMeshObjectInstance = IntPtr.Zero;
 
-			CheckError(Internal.Lib3MFWrapper.Model_GetMeshObjectByID (Handle, AResourceID, out newMeshObjectInstance));
+			CheckError(Internal.Lib3MFWrapper.Model_GetMeshObjectByID (Handle, AUniqueResourceID, out newMeshObjectInstance));
 			return new CMeshObject (newMeshObjectInstance );
 		}
 
-		public CComponentsObject GetComponentsObjectByID (UInt32 AResourceID)
+		public CComponentsObject GetComponentsObjectByID (UInt32 AUniqueResourceID)
 		{
 			IntPtr newComponentsObjectInstance = IntPtr.Zero;
 
-			CheckError(Internal.Lib3MFWrapper.Model_GetComponentsObjectByID (Handle, AResourceID, out newComponentsObjectInstance));
+			CheckError(Internal.Lib3MFWrapper.Model_GetComponentsObjectByID (Handle, AUniqueResourceID, out newComponentsObjectInstance));
 			return new CComponentsObject (newComponentsObjectInstance );
 		}
 
-		public CColorGroup GetColorGroupByID (UInt32 AResourceID)
+		public CColorGroup GetColorGroupByID (UInt32 AUniqueResourceID)
 		{
 			IntPtr newColorGroupInstance = IntPtr.Zero;
 
-			CheckError(Internal.Lib3MFWrapper.Model_GetColorGroupByID (Handle, AResourceID, out newColorGroupInstance));
+			CheckError(Internal.Lib3MFWrapper.Model_GetColorGroupByID (Handle, AUniqueResourceID, out newColorGroupInstance));
 			return new CColorGroup (newColorGroupInstance );
 		}
 
-		public CSliceStack GetSliceStackByID (UInt32 AResourceID)
+		public CSliceStack GetSliceStackByID (UInt32 AUniqueResourceID)
 		{
 			IntPtr newSliceStacInstance = IntPtr.Zero;
 
-			CheckError(Internal.Lib3MFWrapper.Model_GetSliceStackByID (Handle, AResourceID, out newSliceStacInstance));
+			CheckError(Internal.Lib3MFWrapper.Model_GetSliceStackByID (Handle, AUniqueResourceID, out newSliceStacInstance));
 			return new CSliceStack (newSliceStacInstance );
 		}
 
@@ -3993,6 +4944,20 @@ namespace Lib3MF {
 			byte[] byteExtension = Encoding.UTF8.GetBytes(AExtension + char.MinValue);
 
 			CheckError(Internal.Lib3MFWrapper.Model_RemoveCustomContentType (Handle, byteExtension));
+		}
+
+		public void SetRandomNumberCallback (IntPtr ATheCallback, UInt64 AUserData)
+		{
+
+			CheckError(Internal.Lib3MFWrapper.Model_SetRandomNumberCallback (Handle, IntPtr.Zero, AUserData));
+		}
+
+		public CKeyStore GetKeyStore ()
+		{
+			IntPtr newKeyStore = IntPtr.Zero;
+
+			CheckError(Internal.Lib3MFWrapper.Model_GetKeyStore (Handle, out newKeyStore));
+			return new CKeyStore (newKeyStore );
 		}
 
 	}
