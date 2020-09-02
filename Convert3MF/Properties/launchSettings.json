@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "Convert3MF": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}

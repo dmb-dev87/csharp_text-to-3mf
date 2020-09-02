@@ -8,12 +8,6 @@ namespace Convert3MF
 { 
     class Program
     {
-
-        public const int LIB3MF_OK = 0;
-        public const uint LIB3MF_FAIL = 0x80004005;
-        public const uint LIB3MF_POINTER = 0x80004003;
-        public const uint LIB3MF_INVALIDARG = 0x80070057;
-
         static void Main(string[] args)
         {
             string fileName = new string(new char[999]);
@@ -35,26 +29,18 @@ namespace Convert3MF
             Console.WriteLine("Generating 3MF Model... " + outputName);
             Console.WriteLine("\n");
 
-            int hResult;
-            uint nInterfaceVersionMajor;
-            uint nInterfaceVersionMinor;
-            uint nInterfaceVersionMicro;
-            UInt32 nErrorMessage;
-            string pszErrorMessage;
-
-            IntPtr handler;
-
-            CModel pModel;
-            IntPtr p3MFWriter;
-            IntPtr pBuildItem;
-            IntPtr pPropertyHandler;
-            IntPtr pDefaultPropertyHandler;
+            CModel aModel;
+            CWriter a3MFWriter;
+            CBuildItem aBuildItem;
+            CColorGroup aColorGroup;
+            //IntPtr pPropertyHandler;
+            //IntPtr pDefaultPropertyHandler;
 
             // Create Model Instance
-            pModel = Wrapper.CreateModel();
+            aModel = Wrapper.CreateModel();
 
             // Add Color Group
-            CColorGroup aColorGroup = pModel.AddColorGroup();
+            aColorGroup = aModel.AddColorGroup();
 
             StreamReader reader = new StreamReader(File.OpenRead(fileName));
             if (reader == null)
@@ -84,7 +70,7 @@ namespace Convert3MF
                 aColor.Green = Byte.Parse(stringValues[2]);
                 aColor.Blue = Byte.Parse(stringValues[3]);
                 aColor.Alpha = 255;                
-                aColorGroup.AddColor(aColor);
+                //aColorGroup.AddColor(aColor);
 
                 // Get vertext count and triangle count
                 int verticiesCount, triangleCount;
@@ -99,14 +85,11 @@ namespace Convert3MF
 
                 //##############################################################################	Mesh Object	Start
                 // Create Mesh Object
-                CMeshObject pMeshObject = pModel.AddMeshObject();
+                CMeshObject aMeshObject = aModel.AddMeshObject();
 
-                pMeshObject.SetName("Colored Box");
+                aMeshObject.SetName("Colored Box");
                 
                 // Create mesh structure of a cube
-
-                //MODELMESHVERTEX* pVertices = new MODELMESHVERTEX[verticiesCount];
-                //MODELMESHTRIANGLE* pTriangles = new MODELMESHTRIANGLE[trianglesCount];
                 sPosition[] aVertices = new sPosition[verticiesCount];
                 for (int i = 0; i < verticiesCount; i++)
                 {
@@ -117,7 +100,7 @@ namespace Convert3MF
                     position.Coordinates[0] = Single.Parse(stringValues[0]);
                     position.Coordinates[1] = Single.Parse(stringValues[1]);
                     position.Coordinates[2] = Single.Parse(stringValues[2]);
-                    pMeshObject.AddVertex(position);
+                    aMeshObject.AddVertex(position);
                     aVertices[i] = position;
                 }
 
@@ -131,74 +114,40 @@ namespace Convert3MF
                     triangle.Indices[0] = UInt32.Parse(stringValues[0]);
                     triangle.Indices[1] = UInt32.Parse(stringValues[1]);
                     triangle.Indices[2] = UInt32.Parse(stringValues[2]);
-                    pMeshObject.AddTriangle(triangle);
+                    aMeshObject.AddTriangle(triangle);
                     aIndices[i] = triangle;
                 }
 
-                //pMeshObject.GetVertices(out aVertices);
-                //pMeshObject.GetTriangleIndices(out aIndices);
+                //aMeshObject.GetVertices(out aVertices);
+                //aMeshObject.GetTriangleIndices(out aIndices);
 
-                //pMeshObject.SetGeometry(aVertices, aIndices);
+                aMeshObject.SetGeometry(aVertices, aIndices);
 
-                //if (hResult != LIB3MF_OK)
-                //{
-                //    std::cout << "could not set mesh geometry: " << std::hex << hResult << std::endl;
-                //    lib3mf_getlasterror(pMeshObject, &nErrorMessage, &pszErrorMessage);
-                //    std::cout << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
-                //    lib3mf_release(pMeshObject);
-                //    lib3mf_release(pModel);
-                //    return -1;
-                //}
-
-                //MODELMESHCOLOR_SRGB sColorRed = fnCreateColor(colorR, colorG, colorB);
-
-                //hResult = lib3mf_object_createdefaultpropertyhandler(pMeshObject, &pDefaultPropertyHandler);
-                //if (hResult != LIB3MF_OK)
-                //{
-                //    std::cout << "could not create default property handler: " << std::hex << hResult << std::endl;
-                //    lib3mf_getlasterror(pMeshObject, &nErrorMessage, &pszErrorMessage);
-                //    std::cout << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
-                //    lib3mf_release(pMeshObject);
-                //    lib3mf_release(pModel);
-                //    return -1;
-                //}
-
-                //lib3mf_defaultpropertyhandler_setcolor(pDefaultPropertyHandler, &sColorRed);
-                //lib3mf_release(pDefaultPropertyHandler);
+                // Set initial transform
+                sTransform aTransform = Wrapper.GetIdentityTransform();
 
                 //Add Build Item for Mesh
-                sTransform aTransform;
-                CBuildItem aBuildItem = pModel.AddBuildItem(pMeshObject, aTransform);
-
-                //if (hResult != LIB3MF_OK)
-                //{
-                //    std::cout << "could not create build item: " << std::hex << hResult << std::endl;
-                //    lib3mf_getlasterror(pModel, &nErrorMessage, &pszErrorMessage);
-                //    std::cout << "error #" << std::hex << nErrorMessage << ": " << pszErrorMessage << std::endl;
-                //    lib3mf_release(pMeshObject);
-                //    lib3mf_release(pModel);
-                //    return -1;
-                //}
+                aBuildItem = aModel.AddBuildItem(aMeshObject, aTransform);
 
                 // Output cube as STL and 3MF
-                Wrapper.Release(pMeshObject);
-                //Wrapper.Release(aBuildItem);
+                Wrapper.Release(aMeshObject);
+                Wrapper.Release(aBuildItem);
                 //############################################################################		Mesh Object end
             }
             reader.Close();
 
             // Create Model Writer
-            CWriter aWriter = pModel.QueryWriter("3mf");
+            a3MFWriter = aModel.QueryWriter("3mf");
             
             // Export Model into File
             Console.WriteLine("Writing ...");
-            aWriter.WriteToFile(outputName);
+            a3MFWriter.WriteToFile(outputName);
 
             // Release Model Writer
-            Wrapper.Release(aWriter);
+            Wrapper.Release(a3MFWriter);
 
             // Release Model
-            Wrapper.Release(pModel);
+            Wrapper.Release(aModel);
 
             Console.WriteLine("Done");
         }
