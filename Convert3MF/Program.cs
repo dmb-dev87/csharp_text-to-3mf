@@ -14,39 +14,50 @@ namespace Convert3MF
 
             if (args.Length < 1)
             {
-                Console.WriteLine("Input file Name ");
+                Console.WriteLine("Input file Name: ");
                 fileName = Console.ReadLine();
             }
             else
             {
-                fileName = args[1];
+                fileName = args[0];
             }
 
-            outputName = fileName.Substring(0, fileName.IndexOf('.'));
-            outputName += ".3mf";
+            string outputPath = fileName.Substring(0, fileName.LastIndexOf('/'));
+            string name = fileName.Substring(fileName.LastIndexOf('/')+1, fileName.LastIndexOf('.') - fileName.LastIndexOf('/') - 1);
+            outputName = outputPath + "/" + name + ".3mf";
 
-            Console.WriteLine("Generating 3MF Model... " + outputName);
-            Console.WriteLine("\n");
+            Console.WriteLine("Generating 3MF Model: " + outputName);
+
+            StreamReader reader;
+
+            try
+            {
+                reader = new StreamReader(File.OpenRead(fileName));
+                if (reader == null)
+                {
+                    Console.WriteLine("Unable to open file");
+                    return;
+                }
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine("Cannot find the file.");
+                return;
+            }
+
+            Console.WriteLine("Create model...");
 
             CModel aModel;
             CWriter a3MFWriter;
             CBuildItem aBuildItem;
             CColorGroup aColorGroup;
-            //IntPtr pPropertyHandler;
-            //IntPtr pDefaultPropertyHandler;
+
 
             // Create Model Instance
             aModel = Wrapper.CreateModel();
 
             // Add Color Group
             aColorGroup = aModel.AddColorGroup();
-
-            StreamReader reader = new StreamReader(File.OpenRead(fileName));
-            if (reader == null)
-            {
-                Console.Write("Unable to open file");
-                return;
-            }
 
             string strModelCount;
             string strColor;
@@ -121,9 +132,6 @@ namespace Convert3MF
                     aIndices[j] = triangle;
                 }                
 
-                //aMeshObject.GetVertices(out aVertices);
-                //aMeshObject.GetTriangleIndices(out aIndices);
-
                 aMeshObject.SetGeometry(aVertices, aIndices);
 
                 // Set initial transform
@@ -143,7 +151,7 @@ namespace Convert3MF
             a3MFWriter = aModel.QueryWriter("3mf");
             
             // Export Model into File
-            Console.WriteLine("Writing ...");
+            Console.WriteLine("Writing to file...");
             a3MFWriter.WriteToFile(outputName);
 
             // Release Model Writer
@@ -152,7 +160,7 @@ namespace Convert3MF
             // Release Model
             Wrapper.Release(aModel);
 
-            Console.WriteLine("Done");
+            Console.WriteLine("Done.");
         }
     }
 }

@@ -13,4 +13,11 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ContentWithTargetPath Include="lib\lib3MF.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>lib3MF.dll</TargetPath>
+    </ContentWithTargetPath>
+  </ItemGroup>
+
 </Project>
