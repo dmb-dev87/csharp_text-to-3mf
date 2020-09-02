@@ -22,7 +22,7 @@ namespace Convert3MF
                 fileName = args[1];
             }
 
-            outputName = fileName.Substring(0, fileName.Length - fileName.IndexOf('.') + 1);
+            outputName = fileName.Substring(0, fileName.IndexOf('.'));
             outputName += ".3mf";
 
             Console.WriteLine("Generating 3MF Model... " + outputName);
@@ -108,7 +108,7 @@ namespace Convert3MF
                 }
 
                 sTriangle[] aIndices = new sTriangle[triangleCount];
-                for (int i = 0; i < triangleCount; i++)
+                for (int j = 0; j < triangleCount; j++)
                 {
                     sTriangle triangle;
                     triangle.Indices = new UInt32[3];
@@ -118,8 +118,8 @@ namespace Convert3MF
                     triangle.Indices[1] = UInt32.Parse(stringValues[1]);
                     triangle.Indices[2] = UInt32.Parse(stringValues[2]);
                     aMeshObject.AddTriangle(triangle);
-                    aIndices[i] = triangle;
-                }
+                    aIndices[j] = triangle;
+                }                
 
                 //aMeshObject.GetVertices(out aVertices);
                 //aMeshObject.GetTriangleIndices(out aIndices);

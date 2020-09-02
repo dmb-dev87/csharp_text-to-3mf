@@ -1661,7 +1661,7 @@ namespace Lib3MF {
 		~CBase ()
 		{
 			if (Handle != IntPtr.Zero) {
-				Internal.Lib3MFWrapper.Release (Handle);
+				//Internal.Lib3MFWrapper.Release (Handle);
 				Handle = IntPtr.Zero;
 			}
 		}
