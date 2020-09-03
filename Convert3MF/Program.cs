@@ -10,7 +10,6 @@ namespace Convert3MF
         static void Main(string[] args)
         {
             string fileName = new string(new char[999]);
-            string outputName = new string(new char[999]);
 
             if (args.Length < 1)
             {
@@ -22,17 +21,19 @@ namespace Convert3MF
                 fileName = args[0];
             }
 
-            string outputPath = fileName.Substring(0, fileName.LastIndexOf('/'));
-            string name = fileName.Substring(fileName.LastIndexOf('/')+1, fileName.LastIndexOf('.') - fileName.LastIndexOf('/') - 1);
-            outputName = outputPath + "/" + name + ".3mf";
+            string inputPath = Path.GetFullPath(fileName);
 
-            Console.WriteLine("Generating 3MF Model: " + outputName);
+            string outputPath = inputPath.Substring(0, inputPath.LastIndexOf('\\'));
+            string outputName = inputPath.Substring(inputPath.LastIndexOf('\\')+1, inputPath.LastIndexOf('.') - inputPath.LastIndexOf('\\') - 1);
+            outputPath = outputPath + "\\" + outputName + ".3mf";
+
+            Console.WriteLine("Generating 3MF Model: " + outputPath);
 
             StreamReader reader;
 
             try
             {
-                reader = new StreamReader(File.OpenRead(fileName));
+                reader = new StreamReader(File.OpenRead(inputPath));
                 if (reader == null)
                 {
                     Console.WriteLine("Unable to open file");
@@ -152,7 +153,7 @@ namespace Convert3MF
             
             // Export Model into File
             Console.WriteLine("Writing to file...");
-            a3MFWriter.WriteToFile(outputName);
+            a3MFWriter.WriteToFile(outputPath);
 
             // Release Model Writer
             Wrapper.Release(a3MFWriter);
