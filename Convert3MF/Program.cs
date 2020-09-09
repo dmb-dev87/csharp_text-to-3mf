@@ -77,7 +77,6 @@ namespace Convert3MF
                 // Create Mesh Object
                 CMeshObject aMeshObject = aModel.AddMeshObject();
                 uint aResourceId, aPropertyId;
-                aMeshObject.GetObjectLevelProperty(out aResourceId, out aPropertyId);
 
                 // Add Color to colorgroup
                 sColor aColor;
@@ -87,9 +86,6 @@ namespace Convert3MF
                 aColor.Green = Byte.Parse(stringValues[2]);
                 aColor.Blue = Byte.Parse(stringValues[3]);
                 aColor.Alpha = 255;
-
-                //aColorGroup.AddColor(aColor);
-                //aColorGroup.SetColor(aPropertyId, aColor);
 
                 aMeshObject.SetName("Colored Box");
 
@@ -134,6 +130,10 @@ namespace Convert3MF
                 }                
 
                 aMeshObject.SetGeometry(aVertices, aIndices);
+
+                aPropertyId = aColorGroup.AddColor(aColor);
+
+                aMeshObject.SetObjectLevelProperty(aColorGroup.GetUniqueResourceID(), aPropertyId);
 
                 // Set initial transform
                 sTransform aTransform = Wrapper.GetIdentityTransform();

@@ -768,7 +768,7 @@ namespace Lib3MF {
 			public unsafe extern static Int32 ColorGroup_GetAllPropertyIDs (IntPtr Handle, UInt64 sizePropertyIDs, out UInt64 neededPropertyIDs, IntPtr dataPropertyIDs);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_colorgroup_addcolor", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 ColorGroup_AddColor (IntPtr Handle, InternalColor ATheColor, out UInt32 APropertyID);
+			public unsafe extern static Int32 ColorGroup_AddColor (IntPtr Handle, IntPtr ATheColor, out UInt32 APropertyID);
 
 			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_colorgroup_removecolor", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ColorGroup_RemoveColor (IntPtr Handle, UInt32 APropertyID);
@@ -3271,7 +3271,11 @@ namespace Lib3MF {
 			Internal.InternalColor intTheColor = Internal.Lib3MFWrapper.convertStructToInternal_Color (ATheColor);
 			UInt32 resultPropertyID = 0;
 
-			CheckError(Internal.Lib3MFWrapper.ColorGroup_AddColor (Handle, intTheColor, out resultPropertyID));
+			IntPtr pColor = Marshal.AllocHGlobal(Marshal.SizeOf(intTheColor));
+
+			Marshal.StructureToPtr(intTheColor, pColor, false);
+
+			CheckError(Internal.Lib3MFWrapper.ColorGroup_AddColor (Handle, pColor, out resultPropertyID));
 			return resultPropertyID;
 		}
 
