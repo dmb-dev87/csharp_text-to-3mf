@@ -23,8 +23,8 @@ namespace Convert3MF
 
             string inputPath = Path.GetFullPath(fileName);
 
-            string outputPath = inputPath.Substring(0, inputPath.LastIndexOf('\\'));
-            string outputName = inputPath.Substring(inputPath.LastIndexOf('\\')+1, inputPath.LastIndexOf('.') - inputPath.LastIndexOf('\\') - 1);
+            string outputPath = inputPath.Substring(0, inputPath.LastIndexOf("\\"));
+            string outputName = inputPath.Substring(inputPath.LastIndexOf("\\")+1, inputPath.LastIndexOf('.') - inputPath.LastIndexOf("\\") - 1);
             outputPath = outputPath + "\\" + outputName + ".3mf";
 
             Console.WriteLine("Generating 3MF Model: " + outputPath);
@@ -111,7 +111,7 @@ namespace Convert3MF
                     position.Coordinates[0] = Single.Parse(stringValues[0]);
                     position.Coordinates[1] = Single.Parse(stringValues[1]);
                     position.Coordinates[2] = Single.Parse(stringValues[2]);
-                    aMeshObject.AddVertex(position);
+                    //aMeshObject.AddVertex(position);
                     aVertices[i] = position;
                 }
 
@@ -125,7 +125,7 @@ namespace Convert3MF
                     triangle.Indices[0] = UInt32.Parse(stringValues[0]);
                     triangle.Indices[1] = UInt32.Parse(stringValues[1]);
                     triangle.Indices[2] = UInt32.Parse(stringValues[2]);
-                    aMeshObject.AddTriangle(triangle);
+                    //aMeshObject.AddTriangle(triangle);
                     aIndices[j] = triangle;
                 }                
 

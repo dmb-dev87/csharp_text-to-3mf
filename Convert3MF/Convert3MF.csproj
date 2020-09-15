@@ -18,6 +18,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <TargetPath>lib3MF.dll</TargetPath>
     </ContentWithTargetPath>
+    <ContentWithTargetPath Include="lib\lib3MF.so">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <TargetPath>lib3MF.so</TargetPath>
+    </ContentWithTargetPath>
   </ItemGroup>
 
 </Project>

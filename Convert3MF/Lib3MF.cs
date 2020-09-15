@@ -290,1069 +290,1069 @@ namespace Lib3MF {
 
 		public class Lib3MFWrapper
 		{
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_writetofile", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_writer_writetofile", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Writer_WriteToFile (IntPtr Handle, byte[] AFilename);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_getstreamsize", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_writer_getstreamsize", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Writer_GetStreamSize (IntPtr Handle, out UInt64 AStreamSize);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_writetobuffer", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_writer_writetobuffer", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Writer_WriteToBuffer (IntPtr Handle, UInt64 sizeBuffer, out UInt64 neededBuffer, IntPtr dataBuffer);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_writetocallback", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_writer_writetocallback", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Writer_WriteToCallback (IntPtr Handle, IntPtr ATheWriteCallback, IntPtr ATheSeekCallback, UInt64 AUserData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_setprogresscallback", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_writer_setprogresscallback", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Writer_SetProgressCallback (IntPtr Handle, IntPtr AProgressCallback, UInt64 AUserData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_getdecimalprecision", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_writer_getdecimalprecision", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Writer_GetDecimalPrecision (IntPtr Handle, out UInt32 ADecimalPrecision);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_setdecimalprecision", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_writer_setdecimalprecision", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Writer_SetDecimalPrecision (IntPtr Handle, UInt32 ADecimalPrecision);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_setstrictmodeactive", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_writer_setstrictmodeactive", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Writer_SetStrictModeActive (IntPtr Handle, Byte AStrictModeActive);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_getstrictmodeactive", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_writer_getstrictmodeactive", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Writer_GetStrictModeActive (IntPtr Handle, out Byte AStrictModeActive);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_getwarning", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_writer_getwarning", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Writer_GetWarning (IntPtr Handle, UInt32 AIndex, out UInt32 AErrorCode, UInt32 sizeWarning, out UInt32 neededWarning, IntPtr dataWarning);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_getwarningcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_writer_getwarningcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Writer_GetWarningCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_addkeywrappingcallback", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_writer_addkeywrappingcallback", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Writer_AddKeyWrappingCallback (IntPtr Handle, byte[] AConsumerID, IntPtr ATheCallback, UInt64 AUserData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_writer_setcontentencryptioncallback", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_writer_setcontentencryptioncallback", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Writer_SetContentEncryptionCallback (IntPtr Handle, IntPtr ATheCallback, UInt64 AUserData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_readfromfile", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_reader_readfromfile", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Reader_ReadFromFile (IntPtr Handle, byte[] AFilename);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_readfrombuffer", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_reader_readfrombuffer", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Reader_ReadFromBuffer (IntPtr Handle, UInt64 sizeBuffer, IntPtr dataBuffer);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_readfromcallback", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_reader_readfromcallback", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Reader_ReadFromCallback (IntPtr Handle, IntPtr ATheReadCallback, UInt64 AStreamSize, IntPtr ATheSeekCallback, UInt64 AUserData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_setprogresscallback", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_reader_setprogresscallback", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Reader_SetProgressCallback (IntPtr Handle, IntPtr AProgressCallback, UInt64 AUserData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_addrelationtoread", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_reader_addrelationtoread", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Reader_AddRelationToRead (IntPtr Handle, byte[] ARelationShipType);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_removerelationtoread", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_reader_removerelationtoread", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Reader_RemoveRelationToRead (IntPtr Handle, byte[] ARelationShipType);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_setstrictmodeactive", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_reader_setstrictmodeactive", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Reader_SetStrictModeActive (IntPtr Handle, Byte AStrictModeActive);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_getstrictmodeactive", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_reader_getstrictmodeactive", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Reader_GetStrictModeActive (IntPtr Handle, out Byte AStrictModeActive);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_getwarning", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_reader_getwarning", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Reader_GetWarning (IntPtr Handle, UInt32 AIndex, out UInt32 AErrorCode, UInt32 sizeWarning, out UInt32 neededWarning, IntPtr dataWarning);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_getwarningcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_reader_getwarningcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Reader_GetWarningCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_addkeywrappingcallback", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_reader_addkeywrappingcallback", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Reader_AddKeyWrappingCallback (IntPtr Handle, byte[] AConsumerID, IntPtr ATheCallback, UInt64 AUserData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_reader_setcontentencryptioncallback", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_reader_setcontentencryptioncallback", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Reader_SetContentEncryptionCallback (IntPtr Handle, IntPtr ATheCallback, UInt64 AUserData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_packagepart_getpath", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_packagepart_getpath", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 PackagePart_GetPath (IntPtr Handle, UInt32 sizePath, out UInt32 neededPath, IntPtr dataPath);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_packagepart_setpath", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_packagepart_setpath", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 PackagePart_SetPath (IntPtr Handle, byte[] APath);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resource_getresourceid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resource_getresourceid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Resource_GetResourceID (IntPtr Handle, out UInt32 AUniqueResourceID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resource_getuniqueresourceid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resource_getuniqueresourceid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Resource_GetUniqueResourceID (IntPtr Handle, out UInt32 AUniqueResourceID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resource_packagepart", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resource_packagepart", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Resource_PackagePart (IntPtr Handle, out IntPtr APackagePart);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resource_setpackagepart", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resource_setpackagepart", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Resource_SetPackagePart (IntPtr Handle, IntPtr APackagePart);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resource_getmodelresourceid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resource_getmodelresourceid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Resource_GetModelResourceID (IntPtr Handle, out UInt32 AModelResourceId);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourceiterator_movenext", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resourceiterator_movenext", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ResourceIterator_MoveNext (IntPtr Handle, out Byte AHasNext);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourceiterator_moveprevious", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resourceiterator_moveprevious", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ResourceIterator_MovePrevious (IntPtr Handle, out Byte AHasPrevious);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourceiterator_getcurrent", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resourceiterator_getcurrent", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ResourceIterator_GetCurrent (IntPtr Handle, out IntPtr AResource);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourceiterator_clone", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resourceiterator_clone", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ResourceIterator_Clone (IntPtr Handle, out IntPtr AOutResourceIterator);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourceiterator_count", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resourceiterator_count", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ResourceIterator_Count (IntPtr Handle, out UInt64 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slicestackiterator_getcurrentslicestack", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slicestackiterator_getcurrentslicestack", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 SliceStackIterator_GetCurrentSliceStack (IntPtr Handle, out IntPtr AResource);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_objectiterator_getcurrentobject", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_objectiterator_getcurrentobject", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ObjectIterator_GetCurrentObject (IntPtr Handle, out IntPtr AResource);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobjectiterator_getcurrentmeshobject", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobjectiterator_getcurrentmeshobject", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObjectIterator_GetCurrentMeshObject (IntPtr Handle, out IntPtr AResource);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_componentsobjectiterator_getcurrentcomponentsobject", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_componentsobjectiterator_getcurrentcomponentsobject", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ComponentsObjectIterator_GetCurrentComponentsObject (IntPtr Handle, out IntPtr AResource);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2diterator_getcurrenttexture2d", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2diterator_getcurrenttexture2d", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2DIterator_GetCurrentTexture2D (IntPtr Handle, out IntPtr AResource);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_basematerialgroupiterator_getcurrentbasematerialgroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_basematerialgroupiterator_getcurrentbasematerialgroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BaseMaterialGroupIterator_GetCurrentBaseMaterialGroup (IntPtr Handle, out IntPtr AResource);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_colorgroupiterator_getcurrentcolorgroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_colorgroupiterator_getcurrentcolorgroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ColorGroupIterator_GetCurrentColorGroup (IntPtr Handle, out IntPtr AResource);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2dgroupiterator_getcurrenttexture2dgroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2dgroupiterator_getcurrenttexture2dgroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2DGroupIterator_GetCurrentTexture2DGroup (IntPtr Handle, out IntPtr AResource);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_compositematerialsiterator_getcurrentcompositematerials", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_compositematerialsiterator_getcurrentcompositematerials", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 CompositeMaterialsIterator_GetCurrentCompositeMaterials (IntPtr Handle, out IntPtr AResource);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_multipropertygroupiterator_getcurrentmultipropertygroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_multipropertygroupiterator_getcurrentmultipropertygroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MultiPropertyGroupIterator_GetCurrentMultiPropertyGroup (IntPtr Handle, out IntPtr AResource);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadata_getnamespace", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadata_getnamespace", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaData_GetNameSpace (IntPtr Handle, UInt32 sizeNameSpace, out UInt32 neededNameSpace, IntPtr dataNameSpace);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadata_setnamespace", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadata_setnamespace", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaData_SetNameSpace (IntPtr Handle, byte[] ANameSpace);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadata_getname", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadata_getname", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaData_GetName (IntPtr Handle, UInt32 sizeName, out UInt32 neededName, IntPtr dataName);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadata_setname", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadata_setname", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaData_SetName (IntPtr Handle, byte[] AName);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadata_getkey", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadata_getkey", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaData_GetKey (IntPtr Handle, UInt32 sizeKey, out UInt32 neededKey, IntPtr dataKey);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadata_getmustpreserve", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadata_getmustpreserve", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaData_GetMustPreserve (IntPtr Handle, out Byte AMustPreserve);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadata_setmustpreserve", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadata_setmustpreserve", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaData_SetMustPreserve (IntPtr Handle, Byte AMustPreserve);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadata_gettype", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadata_gettype", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaData_GetType (IntPtr Handle, UInt32 sizeType, out UInt32 neededType, IntPtr dataType);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadata_settype", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadata_settype", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaData_SetType (IntPtr Handle, byte[] AType);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadata_getvalue", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadata_getvalue", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaData_GetValue (IntPtr Handle, UInt32 sizeValue, out UInt32 neededValue, IntPtr dataValue);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadata_setvalue", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadata_setvalue", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaData_SetValue (IntPtr Handle, byte[] AValue);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadatagroup_getmetadatacount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadatagroup_getmetadatacount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaDataGroup_GetMetaDataCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadatagroup_getmetadata", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadatagroup_getmetadata", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaDataGroup_GetMetaData (IntPtr Handle, UInt32 AIndex, out IntPtr AMetaData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadatagroup_getmetadatabykey", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadatagroup_getmetadatabykey", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaDataGroup_GetMetaDataByKey (IntPtr Handle, byte[] ANameSpace, byte[] AName, out IntPtr AMetaData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadatagroup_removemetadatabyindex", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadatagroup_removemetadatabyindex", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaDataGroup_RemoveMetaDataByIndex (IntPtr Handle, UInt32 AIndex);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadatagroup_removemetadata", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadatagroup_removemetadata", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaDataGroup_RemoveMetaData (IntPtr Handle, IntPtr ATheMetaData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_metadatagroup_addmetadata", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_metadatagroup_addmetadata", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MetaDataGroup_AddMetaData (IntPtr Handle, byte[] ANameSpace, byte[] AName, byte[] AValue, byte[] AType, Byte AMustPreserve, out IntPtr AMetaData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_gettype", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_gettype", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_GetType (IntPtr Handle, out Int32 AObjectType);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_settype", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_settype", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_SetType (IntPtr Handle, Int32 AObjectType);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_getname", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_getname", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_GetName (IntPtr Handle, UInt32 sizeName, out UInt32 neededName, IntPtr dataName);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_setname", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_setname", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_SetName (IntPtr Handle, byte[] AName);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_getpartnumber", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_getpartnumber", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_GetPartNumber (IntPtr Handle, UInt32 sizePartNumber, out UInt32 neededPartNumber, IntPtr dataPartNumber);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_setpartnumber", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_setpartnumber", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_SetPartNumber (IntPtr Handle, byte[] APartNumber);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_ismeshobject", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_ismeshobject", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_IsMeshObject (IntPtr Handle, out Byte AIsMeshObject);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_iscomponentsobject", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_iscomponentsobject", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_IsComponentsObject (IntPtr Handle, out Byte AIsComponentsObject);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_isvalid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_isvalid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_IsValid (IntPtr Handle, out Byte AIsValid);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_setattachmentasthumbnail", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_setattachmentasthumbnail", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_SetAttachmentAsThumbnail (IntPtr Handle, IntPtr AAttachment);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_getthumbnailattachment", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_getthumbnailattachment", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_GetThumbnailAttachment (IntPtr Handle, out IntPtr AAttachment);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_clearthumbnailattachment", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_clearthumbnailattachment", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_ClearThumbnailAttachment (IntPtr Handle);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_getoutbox", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_getoutbox", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_GetOutbox (IntPtr Handle, out InternalBox AOutbox);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_getuuid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_getuuid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_GetUUID (IntPtr Handle, out Byte AHasUUID, UInt32 sizeUUID, out UInt32 neededUUID, IntPtr dataUUID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_setuuid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_setuuid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_SetUUID (IntPtr Handle, byte[] AUUID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_getmetadatagroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_getmetadatagroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_GetMetaDataGroup (IntPtr Handle, out IntPtr AMetaDataGroup);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_setslicesmeshresolution", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_setslicesmeshresolution", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_SetSlicesMeshResolution (IntPtr Handle, Int32 AMeshResolution);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_getslicesmeshresolution", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_getslicesmeshresolution", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_GetSlicesMeshResolution (IntPtr Handle, out Int32 AMeshResolution);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_hasslices", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_hasslices", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_HasSlices (IntPtr Handle, Byte ARecursive, out Byte AHasSlices);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_clearslicestack", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_clearslicestack", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_ClearSliceStack (IntPtr Handle);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_getslicestack", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_getslicestack", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_GetSliceStack (IntPtr Handle, out IntPtr ASliceStackInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_object_assignslicestack", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_object_assignslicestack", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Object_AssignSliceStack (IntPtr Handle, IntPtr ASliceStackInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_getvertexcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_getvertexcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_GetVertexCount (IntPtr Handle, out UInt32 AVertexCount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_gettrianglecount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_gettrianglecount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_GetTriangleCount (IntPtr Handle, out UInt32 AVertexCount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_getvertex", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_getvertex", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_GetVertex (IntPtr Handle, UInt32 AIndex, out InternalPosition ACoordinates);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_setvertex", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_setvertex", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_SetVertex (IntPtr Handle, UInt32 AIndex, InternalPosition ACoordinates);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_addvertex", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_addvertex", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_AddVertex (IntPtr Handle, InternalPosition ACoordinates, out UInt32 ANewIndex);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_getvertices", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_getvertices", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_GetVertices (IntPtr Handle, UInt64 sizeVertices, out UInt64 neededVertices, IntPtr dataVertices);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_gettriangle", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_gettriangle", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_GetTriangle (IntPtr Handle, UInt32 AIndex, out InternalTriangle AIndices);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_settriangle", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_settriangle", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_SetTriangle (IntPtr Handle, UInt32 AIndex, InternalTriangle AIndices);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_addtriangle", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_addtriangle", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_AddTriangle (IntPtr Handle, InternalTriangle AIndices, out UInt32 ANewIndex);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_gettriangleindices", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_gettriangleindices", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_GetTriangleIndices (IntPtr Handle, UInt64 sizeIndices, out UInt64 neededIndices, IntPtr dataIndices);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_setobjectlevelproperty", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_setobjectlevelproperty", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_SetObjectLevelProperty (IntPtr Handle, UInt32 AUniqueResourceID, UInt32 APropertyID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_getobjectlevelproperty", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_getobjectlevelproperty", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_GetObjectLevelProperty (IntPtr Handle, out UInt32 AUniqueResourceID, out UInt32 APropertyID, out Byte AHasObjectLevelProperty);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_settriangleproperties", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_settriangleproperties", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_SetTriangleProperties (IntPtr Handle, UInt32 AIndex, InternalTriangleProperties AProperties);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_gettriangleproperties", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_gettriangleproperties", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_GetTriangleProperties (IntPtr Handle, UInt32 AIndex, out InternalTriangleProperties AProperty);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_setalltriangleproperties", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_setalltriangleproperties", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_SetAllTriangleProperties (IntPtr Handle, UInt64 sizePropertiesArray, IntPtr dataPropertiesArray);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_getalltriangleproperties", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_getalltriangleproperties", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_GetAllTriangleProperties (IntPtr Handle, UInt64 sizePropertiesArray, out UInt64 neededPropertiesArray, IntPtr dataPropertiesArray);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_clearallproperties", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_clearallproperties", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_ClearAllProperties (IntPtr Handle);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_setgeometry", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_setgeometry", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_SetGeometry (IntPtr Handle, UInt64 sizeVertices, IntPtr dataVertices, UInt64 sizeIndices, IntPtr dataIndices);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_ismanifoldandoriented", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_ismanifoldandoriented", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_IsManifoldAndOriented (IntPtr Handle, out Byte AIsManifoldAndOriented);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_meshobject_beamlattice", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_meshobject_beamlattice", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MeshObject_BeamLattice (IntPtr Handle, out IntPtr ATheBeamLattice);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getminlength", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_getminlength", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetMinLength (IntPtr Handle, out Double AMinLength);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_setminlength", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_setminlength", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_SetMinLength (IntPtr Handle, Double AMinLength);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getclipping", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_getclipping", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetClipping (IntPtr Handle, out Int32 AClipMode, out UInt32 AUniqueResourceID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_setclipping", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_setclipping", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_SetClipping (IntPtr Handle, Int32 AClipMode, UInt32 AUniqueResourceID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getrepresentation", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_getrepresentation", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetRepresentation (IntPtr Handle, out Byte AHasRepresentation, out UInt32 AUniqueResourceID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_setrepresentation", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_setrepresentation", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_SetRepresentation (IntPtr Handle, UInt32 AUniqueResourceID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getballoptions", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_getballoptions", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetBallOptions (IntPtr Handle, out Int32 ABallMode, out Double ABallRadius);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_setballoptions", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_setballoptions", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_SetBallOptions (IntPtr Handle, Int32 ABallMode, Double ABallRadius);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getbeamcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_getbeamcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetBeamCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getbeam", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_getbeam", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetBeam (IntPtr Handle, UInt32 AIndex, out InternalBeam ABeamInfo);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_addbeam", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_addbeam", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_AddBeam (IntPtr Handle, InternalBeam ABeamInfo, out UInt32 AIndex);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_setbeam", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_setbeam", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_SetBeam (IntPtr Handle, UInt32 AIndex, InternalBeam ABeamInfo);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_setbeams", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_setbeams", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_SetBeams (IntPtr Handle, UInt64 sizeBeamInfo, IntPtr dataBeamInfo);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getbeams", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_getbeams", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetBeams (IntPtr Handle, UInt64 sizeBeamInfo, out UInt64 neededBeamInfo, IntPtr dataBeamInfo);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getballcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_getballcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetBallCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getball", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_getball", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetBall (IntPtr Handle, UInt32 AIndex, out InternalBall ABallInfo);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_addball", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_addball", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_AddBall (IntPtr Handle, InternalBall ABallInfo, out UInt32 AIndex);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_setball", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_setball", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_SetBall (IntPtr Handle, UInt32 AIndex, InternalBall ABallInfo);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_setballs", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_setballs", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_SetBalls (IntPtr Handle, UInt64 sizeBallInfo, IntPtr dataBallInfo);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getballs", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_getballs", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetBalls (IntPtr Handle, UInt64 sizeBallInfo, out UInt64 neededBallInfo, IntPtr dataBallInfo);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getbeamsetcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_getbeamsetcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetBeamSetCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_addbeamset", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_addbeamset", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_AddBeamSet (IntPtr Handle, out IntPtr ABeamSet);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamlattice_getbeamset", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamlattice_getbeamset", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamLattice_GetBeamSet (IntPtr Handle, UInt32 AIndex, out IntPtr ABeamSet);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_component_getobjectresource", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_component_getobjectresource", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Component_GetObjectResource (IntPtr Handle, out IntPtr AObjectResource);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_component_getobjectresourceid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_component_getobjectresourceid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Component_GetObjectResourceID (IntPtr Handle, out UInt32 AUniqueResourceID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_component_getuuid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_component_getuuid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Component_GetUUID (IntPtr Handle, out Byte AHasUUID, UInt32 sizeUUID, out UInt32 neededUUID, IntPtr dataUUID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_component_setuuid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_component_setuuid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Component_SetUUID (IntPtr Handle, byte[] AUUID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_component_hastransform", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_component_hastransform", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Component_HasTransform (IntPtr Handle, out Byte AHasTransform);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_component_gettransform", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_component_gettransform", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Component_GetTransform (IntPtr Handle, out InternalTransform ATransform);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_component_settransform", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_component_settransform", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Component_SetTransform (IntPtr Handle, InternalTransform ATransform);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_componentsobject_addcomponent", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_componentsobject_addcomponent", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ComponentsObject_AddComponent (IntPtr Handle, IntPtr AObjectResource, InternalTransform ATransform, out IntPtr AComponentInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_componentsobject_getcomponent", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_componentsobject_getcomponent", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ComponentsObject_GetComponent (IntPtr Handle, UInt32 AIndex, out IntPtr AComponentInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_componentsobject_getcomponentcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_componentsobject_getcomponentcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ComponentsObject_GetComponentCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamset_setname", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamset_setname", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamSet_SetName (IntPtr Handle, byte[] AName);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamset_getname", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamset_getname", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamSet_GetName (IntPtr Handle, UInt32 sizeName, out UInt32 neededName, IntPtr dataName);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamset_setidentifier", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamset_setidentifier", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamSet_SetIdentifier (IntPtr Handle, byte[] AIdentifier);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamset_getidentifier", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamset_getidentifier", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamSet_GetIdentifier (IntPtr Handle, UInt32 sizeIdentifier, out UInt32 neededIdentifier, IntPtr dataIdentifier);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamset_getreferencecount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamset_getreferencecount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamSet_GetReferenceCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamset_setreferences", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamset_setreferences", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamSet_SetReferences (IntPtr Handle, UInt64 sizeReferences, IntPtr dataReferences);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamset_getreferences", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamset_getreferences", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamSet_GetReferences (IntPtr Handle, UInt64 sizeReferences, out UInt64 neededReferences, IntPtr dataReferences);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamset_getballreferencecount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamset_getballreferencecount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamSet_GetBallReferenceCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamset_setballreferences", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamset_setballreferences", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamSet_SetBallReferences (IntPtr Handle, UInt64 sizeBallReferences, IntPtr dataBallReferences);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_beamset_getballreferences", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_beamset_getballreferences", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BeamSet_GetBallReferences (IntPtr Handle, UInt64 sizeBallReferences, out UInt64 neededBallReferences, IntPtr dataBallReferences);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_basematerialgroup_getcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_basematerialgroup_getcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BaseMaterialGroup_GetCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_basematerialgroup_getallpropertyids", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_basematerialgroup_getallpropertyids", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BaseMaterialGroup_GetAllPropertyIDs (IntPtr Handle, UInt64 sizePropertyIDs, out UInt64 neededPropertyIDs, IntPtr dataPropertyIDs);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_basematerialgroup_addmaterial", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_basematerialgroup_addmaterial", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BaseMaterialGroup_AddMaterial (IntPtr Handle, byte[] AName, InternalColor ADisplayColor, out UInt32 APropertyID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_basematerialgroup_removematerial", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_basematerialgroup_removematerial", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BaseMaterialGroup_RemoveMaterial (IntPtr Handle, UInt32 APropertyID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_basematerialgroup_getname", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_basematerialgroup_getname", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BaseMaterialGroup_GetName (IntPtr Handle, UInt32 APropertyID, UInt32 sizeName, out UInt32 neededName, IntPtr dataName);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_basematerialgroup_setname", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_basematerialgroup_setname", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BaseMaterialGroup_SetName (IntPtr Handle, UInt32 APropertyID, byte[] AName);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_basematerialgroup_setdisplaycolor", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_basematerialgroup_setdisplaycolor", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BaseMaterialGroup_SetDisplayColor (IntPtr Handle, UInt32 APropertyID, InternalColor ATheColor);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_basematerialgroup_getdisplaycolor", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_basematerialgroup_getdisplaycolor", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BaseMaterialGroup_GetDisplayColor (IntPtr Handle, UInt32 APropertyID, out InternalColor ATheColor);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_colorgroup_getcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_colorgroup_getcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ColorGroup_GetCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_colorgroup_getallpropertyids", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_colorgroup_getallpropertyids", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ColorGroup_GetAllPropertyIDs (IntPtr Handle, UInt64 sizePropertyIDs, out UInt64 neededPropertyIDs, IntPtr dataPropertyIDs);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_colorgroup_addcolor", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_colorgroup_addcolor", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ColorGroup_AddColor (IntPtr Handle, IntPtr ATheColor, out UInt32 APropertyID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_colorgroup_removecolor", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_colorgroup_removecolor", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ColorGroup_RemoveColor (IntPtr Handle, UInt32 APropertyID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_colorgroup_setcolor", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_colorgroup_setcolor", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ColorGroup_SetColor (IntPtr Handle, UInt32 APropertyID, InternalColor ATheColor);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_colorgroup_getcolor", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_colorgroup_getcolor", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ColorGroup_GetColor (IntPtr Handle, UInt32 APropertyID, out InternalColor ATheColor);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2dgroup_getcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2dgroup_getcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2DGroup_GetCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2dgroup_getallpropertyids", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2dgroup_getallpropertyids", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2DGroup_GetAllPropertyIDs (IntPtr Handle, UInt64 sizePropertyIDs, out UInt64 neededPropertyIDs, IntPtr dataPropertyIDs);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2dgroup_addtex2coord", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2dgroup_addtex2coord", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2DGroup_AddTex2Coord (IntPtr Handle, InternalTex2Coord AUVCoordinate, out UInt32 APropertyID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2dgroup_gettex2coord", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2dgroup_gettex2coord", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2DGroup_GetTex2Coord (IntPtr Handle, UInt32 APropertyID, out InternalTex2Coord AUVCoordinate);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2dgroup_removetex2coord", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2dgroup_removetex2coord", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2DGroup_RemoveTex2Coord (IntPtr Handle, UInt32 APropertyID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2dgroup_gettexture2d", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2dgroup_gettexture2d", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2DGroup_GetTexture2D (IntPtr Handle, out IntPtr ATexture2DInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_compositematerials_getcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_compositematerials_getcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 CompositeMaterials_GetCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_compositematerials_getallpropertyids", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_compositematerials_getallpropertyids", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 CompositeMaterials_GetAllPropertyIDs (IntPtr Handle, UInt64 sizePropertyIDs, out UInt64 neededPropertyIDs, IntPtr dataPropertyIDs);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_compositematerials_getbasematerialgroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_compositematerials_getbasematerialgroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 CompositeMaterials_GetBaseMaterialGroup (IntPtr Handle, out IntPtr ABaseMaterialGroupInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_compositematerials_addcomposite", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_compositematerials_addcomposite", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 CompositeMaterials_AddComposite (IntPtr Handle, UInt64 sizeComposite, IntPtr dataComposite, out UInt32 APropertyID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_compositematerials_removecomposite", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_compositematerials_removecomposite", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 CompositeMaterials_RemoveComposite (IntPtr Handle, UInt32 APropertyID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_compositematerials_getcomposite", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_compositematerials_getcomposite", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 CompositeMaterials_GetComposite (IntPtr Handle, UInt32 APropertyID, UInt64 sizeComposite, out UInt64 neededComposite, IntPtr dataComposite);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_multipropertygroup_getcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_multipropertygroup_getcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MultiPropertyGroup_GetCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_multipropertygroup_getallpropertyids", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_multipropertygroup_getallpropertyids", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MultiPropertyGroup_GetAllPropertyIDs (IntPtr Handle, UInt64 sizePropertyIDs, out UInt64 neededPropertyIDs, IntPtr dataPropertyIDs);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_multipropertygroup_addmultiproperty", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_multipropertygroup_addmultiproperty", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MultiPropertyGroup_AddMultiProperty (IntPtr Handle, UInt64 sizePropertyIDs, IntPtr dataPropertyIDs, out UInt32 APropertyID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_multipropertygroup_setmultiproperty", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_multipropertygroup_setmultiproperty", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MultiPropertyGroup_SetMultiProperty (IntPtr Handle, UInt32 APropertyID, UInt64 sizePropertyIDs, IntPtr dataPropertyIDs);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_multipropertygroup_getmultiproperty", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_multipropertygroup_getmultiproperty", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MultiPropertyGroup_GetMultiProperty (IntPtr Handle, UInt32 APropertyID, UInt64 sizePropertyIDs, out UInt64 neededPropertyIDs, IntPtr dataPropertyIDs);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_multipropertygroup_removemultiproperty", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_multipropertygroup_removemultiproperty", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MultiPropertyGroup_RemoveMultiProperty (IntPtr Handle, UInt32 APropertyID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_multipropertygroup_getlayercount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_multipropertygroup_getlayercount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MultiPropertyGroup_GetLayerCount (IntPtr Handle, out UInt32 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_multipropertygroup_addlayer", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_multipropertygroup_addlayer", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MultiPropertyGroup_AddLayer (IntPtr Handle, InternalMultiPropertyLayer ATheLayer, out UInt32 ALayerIndex);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_multipropertygroup_getlayer", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_multipropertygroup_getlayer", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MultiPropertyGroup_GetLayer (IntPtr Handle, UInt32 ALayerIndex, out InternalMultiPropertyLayer ATheLayer);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_multipropertygroup_removelayer", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_multipropertygroup_removelayer", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 MultiPropertyGroup_RemoveLayer (IntPtr Handle, UInt32 ALayerIndex);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_attachment_getpath", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_attachment_getpath", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Attachment_GetPath (IntPtr Handle, UInt32 sizePath, out UInt32 neededPath, IntPtr dataPath);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_attachment_setpath", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_attachment_setpath", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Attachment_SetPath (IntPtr Handle, byte[] APath);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_attachment_packagepart", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_attachment_packagepart", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Attachment_PackagePart (IntPtr Handle, out IntPtr APackagePart);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_attachment_getrelationshiptype", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_attachment_getrelationshiptype", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Attachment_GetRelationShipType (IntPtr Handle, UInt32 sizePath, out UInt32 neededPath, IntPtr dataPath);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_attachment_setrelationshiptype", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_attachment_setrelationshiptype", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Attachment_SetRelationShipType (IntPtr Handle, byte[] APath);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_attachment_writetofile", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_attachment_writetofile", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Attachment_WriteToFile (IntPtr Handle, byte[] AFileName);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_attachment_readfromfile", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_attachment_readfromfile", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Attachment_ReadFromFile (IntPtr Handle, byte[] AFileName);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_attachment_getstreamsize", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_attachment_getstreamsize", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Attachment_GetStreamSize (IntPtr Handle, out UInt64 AStreamSize);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_attachment_writetobuffer", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_attachment_writetobuffer", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Attachment_WriteToBuffer (IntPtr Handle, UInt64 sizeBuffer, out UInt64 neededBuffer, IntPtr dataBuffer);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_attachment_readfrombuffer", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_attachment_readfrombuffer", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Attachment_ReadFromBuffer (IntPtr Handle, UInt64 sizeBuffer, IntPtr dataBuffer);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2d_getattachment", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2d_getattachment", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2D_GetAttachment (IntPtr Handle, out IntPtr AAttachment);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2d_setattachment", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2d_setattachment", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2D_SetAttachment (IntPtr Handle, IntPtr AAttachment);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2d_getcontenttype", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2d_getcontenttype", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2D_GetContentType (IntPtr Handle, out Int32 AContentType);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2d_setcontenttype", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2d_setcontenttype", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2D_SetContentType (IntPtr Handle, Int32 AContentType);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2d_gettilestyleuv", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2d_gettilestyleuv", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2D_GetTileStyleUV (IntPtr Handle, out Int32 ATileStyleU, out Int32 ATileStyleV);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2d_settilestyleuv", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2d_settilestyleuv", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2D_SetTileStyleUV (IntPtr Handle, Int32 ATileStyleU, Int32 ATileStyleV);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2d_getfilter", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2d_getfilter", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2D_GetFilter (IntPtr Handle, out Int32 AFilter);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_texture2d_setfilter", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_texture2d_setfilter", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Texture2D_SetFilter (IntPtr Handle, Int32 AFilter);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditem_getobjectresource", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditem_getobjectresource", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItem_GetObjectResource (IntPtr Handle, out IntPtr AObjectResource);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditem_getuuid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditem_getuuid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItem_GetUUID (IntPtr Handle, out Byte AHasUUID, UInt32 sizeUUID, out UInt32 neededUUID, IntPtr dataUUID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditem_setuuid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditem_setuuid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItem_SetUUID (IntPtr Handle, byte[] AUUID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditem_getobjectresourceid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditem_getobjectresourceid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItem_GetObjectResourceID (IntPtr Handle, out UInt32 AUniqueResourceID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditem_hasobjecttransform", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditem_hasobjecttransform", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItem_HasObjectTransform (IntPtr Handle, out Byte AHasTransform);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditem_getobjecttransform", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditem_getobjecttransform", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItem_GetObjectTransform (IntPtr Handle, out InternalTransform ATransform);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditem_setobjecttransform", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditem_setobjecttransform", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItem_SetObjectTransform (IntPtr Handle, InternalTransform ATransform);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditem_getpartnumber", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditem_getpartnumber", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItem_GetPartNumber (IntPtr Handle, UInt32 sizePartNumber, out UInt32 neededPartNumber, IntPtr dataPartNumber);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditem_setpartnumber", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditem_setpartnumber", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItem_SetPartNumber (IntPtr Handle, byte[] ASetPartnumber);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditem_getmetadatagroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditem_getmetadatagroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItem_GetMetaDataGroup (IntPtr Handle, out IntPtr AMetaDataGroup);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditem_getoutbox", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditem_getoutbox", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItem_GetOutbox (IntPtr Handle, out InternalBox AOutbox);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditemiterator_movenext", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditemiterator_movenext", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItemIterator_MoveNext (IntPtr Handle, out Byte AHasNext);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditemiterator_moveprevious", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditemiterator_moveprevious", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItemIterator_MovePrevious (IntPtr Handle, out Byte AHasPrevious);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditemiterator_getcurrent", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditemiterator_getcurrent", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItemIterator_GetCurrent (IntPtr Handle, out IntPtr ABuildItem);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditemiterator_clone", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditemiterator_clone", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItemIterator_Clone (IntPtr Handle, out IntPtr AOutBuildItemIterator);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_builditemiterator_count", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_builditemiterator_count", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 BuildItemIterator_Count (IntPtr Handle, out UInt64 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slice_setvertices", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slice_setvertices", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Slice_SetVertices (IntPtr Handle, UInt64 sizeVertices, IntPtr dataVertices);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slice_getvertices", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slice_getvertices", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Slice_GetVertices (IntPtr Handle, UInt64 sizeVertices, out UInt64 neededVertices, IntPtr dataVertices);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slice_getvertexcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slice_getvertexcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Slice_GetVertexCount (IntPtr Handle, out UInt64 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slice_addpolygon", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slice_addpolygon", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Slice_AddPolygon (IntPtr Handle, UInt64 sizeIndices, IntPtr dataIndices, out UInt64 AIndex);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slice_getpolygoncount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slice_getpolygoncount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Slice_GetPolygonCount (IntPtr Handle, out UInt64 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slice_setpolygonindices", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slice_setpolygonindices", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Slice_SetPolygonIndices (IntPtr Handle, UInt64 AIndex, UInt64 sizeIndices, IntPtr dataIndices);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slice_getpolygonindices", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slice_getpolygonindices", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Slice_GetPolygonIndices (IntPtr Handle, UInt64 AIndex, UInt64 sizeIndices, out UInt64 neededIndices, IntPtr dataIndices);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slice_getpolygonindexcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slice_getpolygonindexcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Slice_GetPolygonIndexCount (IntPtr Handle, UInt64 AIndex, out UInt64 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slice_getztop", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slice_getztop", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Slice_GetZTop (IntPtr Handle, out Double AZTop);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slicestack_getbottomz", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slicestack_getbottomz", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 SliceStack_GetBottomZ (IntPtr Handle, out Double AZBottom);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slicestack_getslicecount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slicestack_getslicecount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 SliceStack_GetSliceCount (IntPtr Handle, out UInt64 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slicestack_getslice", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slicestack_getslice", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 SliceStack_GetSlice (IntPtr Handle, UInt64 ASliceIndex, out IntPtr ATheSlice);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slicestack_addslice", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slicestack_addslice", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 SliceStack_AddSlice (IntPtr Handle, Double AZTop, out IntPtr ATheSlice);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slicestack_getslicerefcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slicestack_getslicerefcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 SliceStack_GetSliceRefCount (IntPtr Handle, out UInt64 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slicestack_addslicestackreference", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slicestack_addslicestackreference", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 SliceStack_AddSliceStackReference (IntPtr Handle, IntPtr ATheSliceStack);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slicestack_getslicestackreference", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slicestack_getslicestackreference", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 SliceStack_GetSliceStackReference (IntPtr Handle, UInt64 ASliceRefIndex, out IntPtr ATheSliceStack);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slicestack_collapseslicereferences", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slicestack_collapseslicereferences", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 SliceStack_CollapseSliceReferences (IntPtr Handle);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slicestack_setownpath", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slicestack_setownpath", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 SliceStack_SetOwnPath (IntPtr Handle, byte[] APath);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_slicestack_getownpath", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_slicestack_getownpath", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 SliceStack_GetOwnPath (IntPtr Handle, UInt32 sizePath, out UInt32 neededPath, IntPtr dataPath);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_consumer_getconsumerid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_consumer_getconsumerid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Consumer_GetConsumerID (IntPtr Handle, UInt32 sizeConsumerID, out UInt32 neededConsumerID, IntPtr dataConsumerID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_consumer_getkeyid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_consumer_getkeyid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Consumer_GetKeyID (IntPtr Handle, UInt32 sizeKeyID, out UInt32 neededKeyID, IntPtr dataKeyID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_consumer_getkeyvalue", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_consumer_getkeyvalue", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Consumer_GetKeyValue (IntPtr Handle, UInt32 sizeKeyValue, out UInt32 neededKeyValue, IntPtr dataKeyValue);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_accessright_getconsumer", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_accessright_getconsumer", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 AccessRight_GetConsumer (IntPtr Handle, out IntPtr AConsumer);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_accessright_getwrappingalgorithm", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_accessright_getwrappingalgorithm", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 AccessRight_GetWrappingAlgorithm (IntPtr Handle, out Int32 AAlgorithm);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_accessright_getmgfalgorithm", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_accessright_getmgfalgorithm", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 AccessRight_GetMgfAlgorithm (IntPtr Handle, out Int32 AAlgorithm);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_accessright_getdigestmethod", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_accessright_getdigestmethod", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 AccessRight_GetDigestMethod (IntPtr Handle, out Int32 AAlgorithm);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_getencryptionalgorithm", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_contentencryptionparams_getencryptionalgorithm", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ContentEncryptionParams_GetEncryptionAlgorithm (IntPtr Handle, out Int32 AAlgorithm);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_getkey", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_contentencryptionparams_getkey", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ContentEncryptionParams_GetKey (IntPtr Handle, UInt64 sizeByteData, out UInt64 neededByteData, IntPtr dataByteData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_getinitializationvector", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_contentencryptionparams_getinitializationvector", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ContentEncryptionParams_GetInitializationVector (IntPtr Handle, UInt64 sizeByteData, out UInt64 neededByteData, IntPtr dataByteData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_getauthenticationtag", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_contentencryptionparams_getauthenticationtag", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ContentEncryptionParams_GetAuthenticationTag (IntPtr Handle, UInt64 sizeByteData, out UInt64 neededByteData, IntPtr dataByteData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_setauthenticationtag", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_contentencryptionparams_setauthenticationtag", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ContentEncryptionParams_SetAuthenticationTag (IntPtr Handle, UInt64 sizeByteData, IntPtr dataByteData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_getadditionalauthenticationdata", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_contentencryptionparams_getadditionalauthenticationdata", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ContentEncryptionParams_GetAdditionalAuthenticationData (IntPtr Handle, UInt64 sizeByteData, out UInt64 neededByteData, IntPtr dataByteData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_getdescriptor", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_contentencryptionparams_getdescriptor", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ContentEncryptionParams_GetDescriptor (IntPtr Handle, out UInt64 ADescriptor);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_contentencryptionparams_getkeyuuid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_contentencryptionparams_getkeyuuid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ContentEncryptionParams_GetKeyUUID (IntPtr Handle, UInt32 sizeUUID, out UInt32 neededUUID, IntPtr dataUUID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedata_getpath", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resourcedata_getpath", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ResourceData_GetPath (IntPtr Handle, out IntPtr APath);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedata_getencryptionalgorithm", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resourcedata_getencryptionalgorithm", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ResourceData_GetEncryptionAlgorithm (IntPtr Handle, out Int32 AEncryptionAlgorithm);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedata_getcompression", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resourcedata_getcompression", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ResourceData_GetCompression (IntPtr Handle, out Int32 ACompression);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedata_getadditionalauthenticationdata", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resourcedata_getadditionalauthenticationdata", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ResourceData_GetAdditionalAuthenticationData (IntPtr Handle, UInt64 sizeByteData, out UInt64 neededByteData, IntPtr dataByteData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedatagroup_getkeyuuid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resourcedatagroup_getkeyuuid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ResourceDataGroup_GetKeyUUID (IntPtr Handle, UInt32 sizeUUID, out UInt32 neededUUID, IntPtr dataUUID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedatagroup_addaccessright", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resourcedatagroup_addaccessright", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ResourceDataGroup_AddAccessRight (IntPtr Handle, IntPtr AConsumer, Int32 AWrappingAlgorithm, Int32 AMgfAlgorithm, Int32 ADigestMethod, out IntPtr ATheAccessRight);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedatagroup_findaccessrightbyconsumer", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resourcedatagroup_findaccessrightbyconsumer", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ResourceDataGroup_FindAccessRightByConsumer (IntPtr Handle, IntPtr AConsumer, out IntPtr ATheAccessRight);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_resourcedatagroup_removeaccessright", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_resourcedatagroup_removeaccessright", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 ResourceDataGroup_RemoveAccessRight (IntPtr Handle, IntPtr AConsumer);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_addconsumer", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_addconsumer", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_AddConsumer (IntPtr Handle, byte[] AConsumerID, byte[] AKeyID, byte[] AKeyValue, out IntPtr AConsumer);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_getconsumercount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_getconsumercount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_GetConsumerCount (IntPtr Handle, out UInt64 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_getconsumer", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_getconsumer", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_GetConsumer (IntPtr Handle, UInt64 AConsumerIndex, out IntPtr AConsumer);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_removeconsumer", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_removeconsumer", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_RemoveConsumer (IntPtr Handle, IntPtr AConsumer);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_findconsumer", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_findconsumer", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_FindConsumer (IntPtr Handle, byte[] AConsumerID, out IntPtr AConsumer);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_getresourcedatagroupcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_getresourcedatagroupcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_GetResourceDataGroupCount (IntPtr Handle, out UInt64 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_addresourcedatagroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_addresourcedatagroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_AddResourceDataGroup (IntPtr Handle, out IntPtr AResourceDataGroup);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_getresourcedatagroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_getresourcedatagroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_GetResourceDataGroup (IntPtr Handle, UInt64 AResourceDataIndex, out IntPtr AResourceDataGroup);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_removeresourcedatagroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_removeresourcedatagroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_RemoveResourceDataGroup (IntPtr Handle, IntPtr AResourceDataGroup);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_findresourcedatagroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_findresourcedatagroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_FindResourceDataGroup (IntPtr Handle, IntPtr APartPath, out IntPtr AResourceDataGroup);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_addresourcedata", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_addresourcedata", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_AddResourceData (IntPtr Handle, IntPtr AResourceDataGroup, IntPtr APartPath, Int32 AAlgorithm, Int32 ACompression, UInt64 sizeAdditionalAuthenticationData, IntPtr dataAdditionalAuthenticationData, out IntPtr AResourceData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_removeresourcedata", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_removeresourcedata", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_RemoveResourceData (IntPtr Handle, IntPtr AResourceData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_findresourcedata", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_findresourcedata", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_FindResourceData (IntPtr Handle, IntPtr AResourcePath, out IntPtr AResourceData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_getresourcedatacount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_getresourcedatacount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_GetResourceDataCount (IntPtr Handle, out UInt64 ACount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_getresourcedata", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_getresourcedata", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_GetResourceData (IntPtr Handle, UInt64 AResourceDataIndex, out IntPtr AResourceData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_getuuid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_getuuid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_GetUUID (IntPtr Handle, out Byte AHasUUID, UInt32 sizeUUID, out UInt32 neededUUID, IntPtr dataUUID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_keystore_setuuid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_keystore_setuuid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 KeyStore_SetUUID (IntPtr Handle, byte[] AUUID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_rootmodelpart", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_rootmodelpart", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_RootModelPart (IntPtr Handle, out IntPtr ARootModelPart);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_findorcreatepackagepart", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_findorcreatepackagepart", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_FindOrCreatePackagePart (IntPtr Handle, byte[] AAbsolutePath, out IntPtr AModelPart);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_setunit", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_setunit", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_SetUnit (IntPtr Handle, Int32 AUnit);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getunit", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getunit", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetUnit (IntPtr Handle, out Int32 AUnit);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getlanguage", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getlanguage", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetLanguage (IntPtr Handle, UInt32 sizeLanguage, out UInt32 neededLanguage, IntPtr dataLanguage);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_setlanguage", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_setlanguage", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_SetLanguage (IntPtr Handle, byte[] ALanguage);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_querywriter", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_querywriter", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_QueryWriter (IntPtr Handle, byte[] AWriterClass, out IntPtr AWriterInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_queryreader", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_queryreader", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_QueryReader (IntPtr Handle, byte[] AReaderClass, out IntPtr AReaderInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_gettexture2dbyid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_gettexture2dbyid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetTexture2DByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr ATextureInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getpropertytypebyid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getpropertytypebyid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetPropertyTypeByID (IntPtr Handle, UInt32 AUniqueResourceID, out Int32 AThePropertyType);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getbasematerialgroupbyid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getbasematerialgroupbyid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetBaseMaterialGroupByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr ABaseMaterialGroupInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_gettexture2dgroupbyid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_gettexture2dgroupbyid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetTexture2DGroupByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr ATexture2DGroupInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getcompositematerialsbyid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getcompositematerialsbyid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetCompositeMaterialsByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr ACompositeMaterialsInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getmultipropertygroupbyid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getmultipropertygroupbyid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetMultiPropertyGroupByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr AMultiPropertyGroupInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getmeshobjectbyid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getmeshobjectbyid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetMeshObjectByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr AMeshObjectInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getcomponentsobjectbyid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getcomponentsobjectbyid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetComponentsObjectByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr AComponentsObjectInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getcolorgroupbyid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getcolorgroupbyid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetColorGroupByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr AColorGroupInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getslicestackbyid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getslicestackbyid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetSliceStackByID (IntPtr Handle, UInt32 AUniqueResourceID, out IntPtr ASliceStacInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getbuilduuid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getbuilduuid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetBuildUUID (IntPtr Handle, out Byte AHasUUID, UInt32 sizeUUID, out UInt32 neededUUID, IntPtr dataUUID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_setbuilduuid", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_setbuilduuid", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_SetBuildUUID (IntPtr Handle, byte[] AUUID);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getbuilditems", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getbuilditems", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetBuildItems (IntPtr Handle, out IntPtr ABuildItemIterator);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getoutbox", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getoutbox", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetOutbox (IntPtr Handle, out InternalBox AOutbox);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getresources", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getresources", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetResources (IntPtr Handle, out IntPtr AResourceIterator);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getobjects", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getobjects", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetObjects (IntPtr Handle, out IntPtr AResourceIterator);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getmeshobjects", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getmeshobjects", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetMeshObjects (IntPtr Handle, out IntPtr AResourceIterator);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getcomponentsobjects", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getcomponentsobjects", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetComponentsObjects (IntPtr Handle, out IntPtr AResourceIterator);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_gettexture2ds", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_gettexture2ds", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetTexture2Ds (IntPtr Handle, out IntPtr AResourceIterator);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getbasematerialgroups", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getbasematerialgroups", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetBaseMaterialGroups (IntPtr Handle, out IntPtr AResourceIterator);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getcolorgroups", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getcolorgroups", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetColorGroups (IntPtr Handle, out IntPtr AResourceIterator);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_gettexture2dgroups", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_gettexture2dgroups", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetTexture2DGroups (IntPtr Handle, out IntPtr AResourceIterator);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getcompositematerials", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getcompositematerials", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetCompositeMaterials (IntPtr Handle, out IntPtr AResourceIterator);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getmultipropertygroups", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getmultipropertygroups", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetMultiPropertyGroups (IntPtr Handle, out IntPtr AResourceIterator);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getslicestacks", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getslicestacks", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetSliceStacks (IntPtr Handle, out IntPtr AResourceIterator);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_mergetomodel", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_mergetomodel", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_MergeToModel (IntPtr Handle, out IntPtr AMergedModelInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_addmeshobject", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_addmeshobject", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_AddMeshObject (IntPtr Handle, out IntPtr AMeshObjectInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_addcomponentsobject", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_addcomponentsobject", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_AddComponentsObject (IntPtr Handle, out IntPtr AComponentsObjectInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_addslicestack", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_addslicestack", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_AddSliceStack (IntPtr Handle, Double AZBottom, out IntPtr ASliceStackInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_addtexture2dfromattachment", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_addtexture2dfromattachment", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_AddTexture2DFromAttachment (IntPtr Handle, IntPtr ATextureAttachment, out IntPtr ATexture2DInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_addbasematerialgroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_addbasematerialgroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_AddBaseMaterialGroup (IntPtr Handle, out IntPtr ABaseMaterialGroupInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_addcolorgroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_addcolorgroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_AddColorGroup (IntPtr Handle, out IntPtr AColorGroupInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_addtexture2dgroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_addtexture2dgroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_AddTexture2DGroup (IntPtr Handle, IntPtr ATexture2DInstance, out IntPtr ATexture2DGroupInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_addcompositematerials", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_addcompositematerials", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_AddCompositeMaterials (IntPtr Handle, IntPtr ABaseMaterialGroupInstance, out IntPtr ACompositeMaterialsInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_addmultipropertygroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_addmultipropertygroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_AddMultiPropertyGroup (IntPtr Handle, out IntPtr AMultiPropertyGroupInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_addbuilditem", CallingConvention=CallingConvention.Cdecl)]
-			public unsafe extern static Int32 Model_AddBuildItem (IntPtr Handle, IntPtr AObject, InternalTransform ATransform, out IntPtr ABuildItemInstance);
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_addbuilditem", CallingConvention=CallingConvention.Cdecl)]
+			public unsafe extern static Int32 Model_AddBuildItem (IntPtr Handle, IntPtr AObject, IntPtr ATransform, out IntPtr ABuildItemInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_removebuilditem", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_removebuilditem", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_RemoveBuildItem (IntPtr Handle, IntPtr ABuildItemInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getmetadatagroup", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getmetadatagroup", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetMetaDataGroup (IntPtr Handle, out IntPtr ATheMetaDataGroup);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_addattachment", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_addattachment", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_AddAttachment (IntPtr Handle, byte[] AURI, byte[] ARelationShipType, out IntPtr AAttachmentInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_removeattachment", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_removeattachment", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_RemoveAttachment (IntPtr Handle, IntPtr AAttachmentInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getattachment", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getattachment", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetAttachment (IntPtr Handle, UInt32 AIndex, out IntPtr AAttachmentInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_findattachment", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_findattachment", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_FindAttachment (IntPtr Handle, byte[] AURI, out IntPtr AAttachmentInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getattachmentcount", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getattachmentcount", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetAttachmentCount (IntPtr Handle, out UInt32 AAttachmentCount);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_haspackagethumbnailattachment", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_haspackagethumbnailattachment", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_HasPackageThumbnailAttachment (IntPtr Handle, out Byte AHasThumbnail);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_createpackagethumbnailattachment", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_createpackagethumbnailattachment", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_CreatePackageThumbnailAttachment (IntPtr Handle, out IntPtr AAttachment);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getpackagethumbnailattachment", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getpackagethumbnailattachment", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetPackageThumbnailAttachment (IntPtr Handle, out IntPtr AAttachment);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_removepackagethumbnailattachment", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_removepackagethumbnailattachment", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_RemovePackageThumbnailAttachment (IntPtr Handle);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_addcustomcontenttype", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_addcustomcontenttype", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_AddCustomContentType (IntPtr Handle, byte[] AExtension, byte[] AContentType);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_removecustomcontenttype", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_removecustomcontenttype", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_RemoveCustomContentType (IntPtr Handle, byte[] AExtension);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_setrandomnumbercallback", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_setrandomnumbercallback", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_SetRandomNumberCallback (IntPtr Handle, IntPtr ATheCallback, UInt64 AUserData);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_model_getkeystore", CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_model_getkeystore", CallingConvention=CallingConvention.Cdecl)]
 			public unsafe extern static Int32 Model_GetKeyStore (IntPtr Handle, out IntPtr AKeyStore);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_getlibraryversion", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_getlibraryversion", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 GetLibraryVersion (out UInt32 AMajor, out UInt32 AMinor, out UInt32 AMicro);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_getprereleaseinformation", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_getprereleaseinformation", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 GetPrereleaseInformation (out Byte AHasPrereleaseInfo, UInt32 sizePrereleaseInfo, out UInt32 neededPrereleaseInfo, IntPtr dataPrereleaseInfo);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_getbuildinformation", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_getbuildinformation", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 GetBuildInformation (out Byte AHasBuildInfo, UInt32 sizeBuildInformation, out UInt32 neededBuildInformation, IntPtr dataBuildInformation);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_getspecificationversion", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_getspecificationversion", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 GetSpecificationVersion (byte[] ASpecificationURL, out Byte AIsSupported, out UInt32 AMajor, out UInt32 AMinor, out UInt32 AMicro);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_createmodel", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_createmodel", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 CreateModel (out IntPtr AModel);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_release", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_release", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 Release (IntPtr AInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_acquire", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_acquire", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 Acquire (IntPtr AInstance);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_setjournal", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_setjournal", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 SetJournal (byte[] AJournalPath);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_getlasterror", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_getlasterror", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 GetLastError (IntPtr AInstance, UInt32 sizeLastErrorString, out UInt32 neededLastErrorString, IntPtr dataLastErrorString, out Byte AHasLastError);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_retrieveprogressmessage", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_retrieveprogressmessage", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 RetrieveProgressMessage (Int32 ATheProgressIdentifier, UInt32 sizeProgressMessage, out UInt32 neededProgressMessage, IntPtr dataProgressMessage);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_rgbatocolor", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_rgbatocolor", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 RGBAToColor (Byte ARed, Byte AGreen, Byte ABlue, Byte AAlpha, out InternalColor ATheColor);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_floatrgbatocolor", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_floatrgbatocolor", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 FloatRGBAToColor (Single ARed, Single AGreen, Single ABlue, Single AAlpha, out InternalColor ATheColor);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_colortorgba", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_colortorgba", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 ColorToRGBA (InternalColor ATheColor, out Byte ARed, out Byte AGreen, out Byte ABlue, out Byte AAlpha);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_colortofloatrgba", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_colortofloatrgba", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 ColorToFloatRGBA (InternalColor ATheColor, out Single ARed, out Single AGreen, out Single ABlue, out Single AAlpha);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_getidentitytransform", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_getidentitytransform", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 GetIdentityTransform (out InternalTransform ATransform);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_getuniformscaletransform", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_getuniformscaletransform", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 GetUniformScaleTransform (Single AFactor, out InternalTransform ATransform);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_getscaletransform", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_getscaletransform", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 GetScaleTransform (Single AFactorX, Single AFactorY, Single AFactorZ, out InternalTransform ATransform);
 
-			[DllImport("lib3mf.dll", EntryPoint = "lib3mf_gettranslationtransform", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
+			[DllImport("lib3mf", EntryPoint = "lib3mf_gettranslationtransform", CharSet = CharSet.Ansi, CallingConvention=CallingConvention.Cdecl)]
 			public extern static Int32 GetTranslationTransform (Single AVectorX, Single AVectorY, Single AVectorZ, out InternalTransform ATransform);
 
 			public unsafe static sTriangle convertInternalToStruct_Triangle (InternalTriangle intTriangle)
@@ -4846,7 +4846,11 @@ namespace Lib3MF {
 			Internal.InternalTransform intTransform = Internal.Lib3MFWrapper.convertStructToInternal_Transform (ATransform);
 			IntPtr newBuildItemInstance = IntPtr.Zero;
 
-			CheckError(Internal.Lib3MFWrapper.Model_AddBuildItem (Handle, AObject.GetHandle(), intTransform, out newBuildItemInstance));
+			IntPtr pTransform = Marshal.AllocHGlobal(Marshal.SizeOf(intTransform));
+
+			Marshal.StructureToPtr(intTransform, pTransform, false);
+
+			CheckError(Internal.Lib3MFWrapper.Model_AddBuildItem (Handle, AObject.GetHandle(), pTransform, out newBuildItemInstance));
 			return new CBuildItem (newBuildItemInstance );
 		}
 
