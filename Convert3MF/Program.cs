@@ -88,7 +88,7 @@ namespace Convert3MF
                 //##############################################################################	Mesh Object	Start
                 // Create Mesh Object
                 CMeshObject aMeshObject = aModel.AddMeshObject();
-                uint aResourceId, aPropertyId;
+                uint aPropertyId;
 
                 // Add Color to colorgroup
                 sColor aColor;
