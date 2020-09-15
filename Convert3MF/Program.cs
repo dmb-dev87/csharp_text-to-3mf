@@ -2,6 +2,7 @@
 using System.Linq;
 using System.IO;
 using Lib3MF;
+using System.Runtime.InteropServices;
 
 namespace Convert3MF
 { 
@@ -21,11 +22,22 @@ namespace Convert3MF
                 fileName = args[0];
             }
 
+            string str_pathSlash = "\\";
+
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            {
+                str_pathSlash = "/";
+            }
+            else
+            {
+                str_pathSlash = "\\";
+            }
+
             string inputPath = Path.GetFullPath(fileName);
 
-            string outputPath = inputPath.Substring(0, inputPath.LastIndexOf("\\"));
-            string outputName = inputPath.Substring(inputPath.LastIndexOf("\\")+1, inputPath.LastIndexOf('.') - inputPath.LastIndexOf("\\") - 1);
-            outputPath = outputPath + "\\" + outputName + ".3mf";
+            string outputPath = inputPath.Substring(0, inputPath.LastIndexOf(str_pathSlash));
+            string outputName = inputPath.Substring(inputPath.LastIndexOf(str_pathSlash) +1, inputPath.LastIndexOf('.') - inputPath.LastIndexOf(str_pathSlash) - 1);
+            outputPath = outputPath + str_pathSlash + outputName + ".3mf";
 
             Console.WriteLine("Generating 3MF Model: " + outputPath);
 
