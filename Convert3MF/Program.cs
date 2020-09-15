@@ -22,22 +22,23 @@ namespace Convert3MF
                 fileName = args[0];
             }
 
-            string str_pathSlash = "\\";
+            //string str_pathSlash = "\\";
 
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                str_pathSlash = "/";
-            }
-            else
-            {
-                str_pathSlash = "\\";
-            }
+            //if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+            //{
+            //    str_pathSlash = "/";
+            //}
+            //else
+            //{
+            //    str_pathSlash = "\\";
+            //}
 
             string inputPath = Path.GetFullPath(fileName);
+            string inputDir = Path.GetDirectoryName(inputPath);
+            string inputName = Path.GetFileName(inputPath);
 
-            string outputPath = inputPath.Substring(0, inputPath.LastIndexOf(str_pathSlash));
-            string outputName = inputPath.Substring(inputPath.LastIndexOf(str_pathSlash) +1, inputPath.LastIndexOf('.') - inputPath.LastIndexOf(str_pathSlash) - 1);
-            outputPath = outputPath + str_pathSlash + outputName + ".3mf";
+            string outputName = inputName.Substring(0, inputName.LastIndexOf(".")) + ".3mf";
+            string outputPath = Path.Combine(inputDir, outputName);
 
             Console.WriteLine("Generating 3MF Model: " + outputPath);
 
