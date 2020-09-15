@@ -14,13 +14,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ContentWithTargetPath Include="lib\lib3MF.dll">
+    <ContentWithTargetPath Include="lib\lib3mf.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <TargetPath>lib3MF.dll</TargetPath>
+      <TargetPath>lib3mf.dll</TargetPath>
     </ContentWithTargetPath>
-    <ContentWithTargetPath Include="lib\lib3MF.so">
+    <ContentWithTargetPath Include="lib\lib3mf.so">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <TargetPath>lib3MF.so</TargetPath>
+      <TargetPath>lib3mf.so</TargetPath>
     </ContentWithTargetPath>
   </ItemGroup>
 
